@@ -1,0 +1,41 @@
+services:
+  testnet:
+    build: containers/testnet
+    platform: linux/x86_64
+    ports:
+      - "7950:7950"
+
+  mysql:
+    image: "mysql:latest"
+
+    ports:
+      - "3306:3306"
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=api
+
+  api:
+    build: containers/api
+    ports:
+      - "3001:3001"
+
+  elastic:
+    image: elasticsearch:7.17.8
+    environment:
+      - discovery.type=single-node
+
+  redis:
+    image: "redis:alpine"
+
+    command: redis-server
+
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  rabbitmq:
+    image: rabbitmq:3.11.8
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
