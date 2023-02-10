@@ -27,13 +27,10 @@ ENV PATH="$PATH:/home/ubuntu/multiversx-sdk"
 
 RUN mxpy testnet prerequisites
 COPY testnet.toml .
-RUN mxpy testnet config
+RUN mxpy testnet config #not mandatory but useful to construct the go build cache
 
 RUN mxpy config set chainID local-testnet
 RUN mxpy config set proxy http://localhost:7950
-
-ARG CACHEBUST=1
-RUN echo "$CACHEBUST"
 
 COPY wait-for-it.sh .
 RUN sudo chmod +x wait-for-it.sh

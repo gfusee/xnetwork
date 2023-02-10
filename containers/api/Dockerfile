@@ -15,8 +15,6 @@ WORKDIR /home/ubuntu
 #NodeJS setup
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt install nodejs -y
 
-RUN echo "3"
-
 #mx-api-service setup (nodejs)
 RUN sudo apt install git -y
 RUN sudo apt install ffmpeg -y

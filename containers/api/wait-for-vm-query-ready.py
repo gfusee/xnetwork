@@ -10,12 +10,10 @@ def wait_for_vm_query_ready():
     }
 
     while True:
-        print("Querying the proxy...")
         response1 = requests.request("POST", url, headers=headers, data=payload1)
         response2 = requests.request("POST", url, headers=headers, data=payload2)
         if response1.status_code == 200 and response2.status_code == 200:
             break
-        print("VM not ready for queries = Will retry in 1 second...")
         time.sleep(1)
 
 
