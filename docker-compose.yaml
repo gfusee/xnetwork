@@ -1,9 +1,13 @@
+version: '3'
 services:
   testnet:
     build: containers/testnet
     platform: linux/x86_64
     ports:
       - "7950:7950"
+    volumes:
+      - ./containers/testnet/db-downloads:/home/ubuntu/db-downloads
+      - ./containers/testnet/volume:/home/ubuntu/testnet
 
   mysql:
     image: "mysql:latest"

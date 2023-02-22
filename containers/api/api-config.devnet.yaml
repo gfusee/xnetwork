@@ -60,7 +60,7 @@ indexer:
   type: 'elastic'
   maxPagination: 10000
 database:
-  enabled: false
+  enabled: true
   url: 'mongodb://127.0.0.1:27017/api?authSource=admin'
   type: 'mysql'
   host: 'localhost'

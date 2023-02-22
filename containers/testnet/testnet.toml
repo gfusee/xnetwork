@@ -1,2 +1,5 @@
 [networking]
 port_proxy = 7950
+
+[shards]
+count=3
