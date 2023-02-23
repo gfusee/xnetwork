@@ -7,6 +7,7 @@ services:
       - "7950:7950"
     volumes:
       - ./containers/testnet/db-downloads:/home/ubuntu/db-downloads
+      - ./containers/testnet/extracted:/home/ubuntu/extracted
       - ./containers/testnet/volume:/home/ubuntu/testnet
 
   mysql:
@@ -28,6 +29,7 @@ services:
     image: elasticsearch:7.17.8
     environment:
       - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms4G -Xmx4G
 
   redis:
     image: "redis:alpine"

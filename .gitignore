@@ -1,3 +1,4 @@
 .idea
 containers/testnet/volume
 containers/testnet/db-downloads
+containers/testnet/extracted

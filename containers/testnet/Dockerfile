@@ -11,13 +11,17 @@ FROM --platform=linux/x86_64 ghcr.io/gfusee/mx-testnet-docker:main
 #RUN ./download-epochs.sh 2
 #RUN ./download-epochs.sh metachain
 
-COPY extract-epochs.py .
+COPY mx-chain-devnet-config mx-chain-devnet-config
+
+COPY copy-from-extracted.sh .
+RUN sudo chmod +x copy-from-extracted.sh
 COPY import-db.sh .
 RUN sudo chmod +x import-db.sh
 
 COPY wait-for-it.sh .
 RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
+RUN echo "15"
 COPY change-prefs.py change-prefs.py
 
 RUN rm -rf testnet

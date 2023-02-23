@@ -11,7 +11,7 @@ cp change-prefs.py testnet/change-prefs.py
 cd testnet && python3 change-prefs.py && cd ..
 
 echo "Importing database..."
-python3 extract-epochs.py 3908
+./copy-from-extracted.sh
 ./import-db.sh
 
 echo "Running testnet..."
