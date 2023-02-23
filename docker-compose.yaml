@@ -2,7 +2,6 @@ version: '3'
 services:
   testnet:
     build: containers/testnet
-    platform: linux/x86_64
     ports:
       - "7950:7950"
     volumes:
@@ -13,9 +12,6 @@ services:
   mysql:
     image: "mysql:latest"
 
-    ports:
-      - "3306:3306"
-
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=api
@@ -23,13 +19,15 @@ services:
   api:
     build: containers/api
     ports:
-      - "3001:3001"
+      - "3010:3010"
 
   elastic:
     image: elasticsearch:7.17.8
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms4G -Xmx4G
+    ports:
+      - "9201:9200"
 
   redis:
     image: "redis:alpine"

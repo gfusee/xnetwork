@@ -8,8 +8,7 @@ OverridableConfigTomlValues = [
    { File = "external.toml", Path = "ElasticSearchConnector.Enabled", Value = "true" },
    { File = "external.toml", Path = "ElasticSearchConnector.URL", Value = "http://elastic:9200" },
    { File = "config.toml", Path = "GeneralSettings.StartInEpochEnabled", Value = "false" },
-   { File = "config.toml", Path = "GeneralSettings.ChainID", Value = "D" },
-   { File = "config.toml", Path = "StateTriesConfig.SnapshotsEnabled", Value = "false" }
+   { File = "config.toml", Path = "GeneralSettings.ChainID", Value = "D" }
 ]
 """
 
@@ -55,4 +54,4 @@ def replace_in_files():
 
 
 replace_config_folder()
-# replace_in_files()
+replace_in_files()

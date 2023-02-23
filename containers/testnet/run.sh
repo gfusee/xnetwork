@@ -12,6 +12,7 @@ cd testnet && python3 change-prefs.py && cd ..
 
 echo "Importing database..."
 ./copy-from-extracted.sh
+./merge-db.sh
 ./import-db.sh
 
 echo "Running testnet..."
