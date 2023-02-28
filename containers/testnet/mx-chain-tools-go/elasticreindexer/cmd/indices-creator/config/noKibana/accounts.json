@@ -1,0 +1,31 @@
+{
+	"index_patterns": [
+		"accounts-*"
+	],
+	"mappings": {
+		"properties": {
+			"address": {
+				"type": "text"
+			},
+			"balance": {
+				"type": "text"
+			},
+			"balanceNum": {
+				"type": "double"
+			},
+			"nonce": {
+				"type": "double"
+			},
+			"totalBalanceWithStake": {
+				"type": "text"
+			},
+			"totalBalanceWithStakeNum": {
+				"type": "double"
+			}
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

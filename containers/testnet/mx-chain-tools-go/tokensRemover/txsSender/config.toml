@@ -1,0 +1,5 @@
+# Proxy url used to fetch network config + send txs; e.g.: https://gateway.elrond.com for mainnet
+ProxyUrl = ""
+
+# WaitTimeNonceIncremented is the maximum time in seconds to wait between each sent txs to check if the nonce was incremented as expected
+WaitTimeNonceIncremented = 600

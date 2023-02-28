@@ -1,0 +1,8 @@
+[config]
+    [config.elasticIndexerConfig]
+        url = ""
+        username = ""
+        password = ""
+
+    [config.gateway]
+        url = ""

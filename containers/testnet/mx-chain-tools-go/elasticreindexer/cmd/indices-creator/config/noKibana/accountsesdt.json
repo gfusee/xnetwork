@@ -1,0 +1,43 @@
+{
+	"index_patterns": [
+		"accountsesdt-*"
+	],
+	"mappings": {
+		"properties": {
+			"balanceNum": {
+				"type": "double"
+			},
+			"data": {
+				"properties": {
+					"attributes": {
+						"type": "text"
+					},
+					"creator": {
+						"type": "text"
+					},
+					"metadata": {
+						"type": "text"
+					},
+					"name": {
+						"type": "text"
+					},
+					"tags": {
+						"type": "text"
+					}
+				},
+				"type": "nested"
+			},
+			"tokenNonce": {
+				"type": "double"
+			},
+           "timestamp": {
+             "type": "date",
+             "format": "epoch_second"
+           }
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

@@ -1,0 +1,34 @@
+{
+	"index_patterns": [
+		"logs-*"
+	],
+	"mappings": {
+		"properties": {
+			"address": {
+				"type": "text"
+			},
+			"events": {
+				"properties": {
+					"address": {
+						"type": "text"
+					},
+					"data": {
+						"type": "text"
+					},
+					"topics": {
+						"type": "text"
+					}
+				},
+				"type": "nested"
+			},
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			}
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

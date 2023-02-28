@@ -1,0 +1,34 @@
+{
+	"index_patterns": [
+		"scresults-*"
+	],
+	"mappings": {
+		"properties": {
+			"gasLimit": {
+				"type": "double"
+			},
+			"gasPrice": {
+				"type": "double"
+			},
+			"nonce": {
+				"type": "double"
+			},
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			}
+		}
+	},
+	"settings": {
+		"index": {
+			"sort.field": [
+				"timestamp"
+			],
+			"sort.order": [
+				"desc"
+			]
+		},
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

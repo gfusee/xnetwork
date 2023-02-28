@@ -1,0 +1,45 @@
+{
+	"index_patterns": [
+		"blocks-*"
+	],
+	"mappings": {
+		"properties": {
+			"gasPenalized": {
+				"type": "double"
+			},
+			"gasProvided": {
+				"type": "double"
+			},
+			"gasRefunded": {
+				"type": "double"
+			},
+			"maxGasLimit": {
+				"type": "double"
+			},
+			"nonce": {
+				"type": "double"
+			},
+			"searchOrder": {
+				"type": "double"
+			},
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			}
+		}
+	},
+	"settings": {
+		"index": {
+			"sort.field": [
+				"timestamp",
+				"nonce"
+			],
+			"sort.order": [
+				"desc",
+				"desc"
+			]
+		},
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

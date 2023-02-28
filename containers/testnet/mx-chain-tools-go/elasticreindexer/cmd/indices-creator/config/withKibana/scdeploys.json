@@ -1,0 +1,26 @@
+{
+	"index_patterns": [
+		"scdeploys-*"
+	],
+	"mappings": {
+		"properties": {
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			},
+			"upgrades": {
+				"properties": {
+					"timestamp": {
+						"format": "epoch_second",
+						"type": "date"
+					}
+				},
+				"type": "nested"
+			}
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 3
+	}
+}

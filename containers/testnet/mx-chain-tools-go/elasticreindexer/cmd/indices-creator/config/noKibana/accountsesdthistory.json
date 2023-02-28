@@ -1,0 +1,20 @@
+{
+	"index_patterns": [
+		"accountsesdthistory-*"
+	],
+	"mappings": {
+		"properties": {
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			},
+			"tokenNonce": {
+				"type": "double"
+			}
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 5
+	}
+}

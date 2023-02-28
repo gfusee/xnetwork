@@ -1,0 +1,17 @@
+{
+	"index_patterns": [
+		"accountshistory-*"
+	],
+	"mappings": {
+		"properties": {
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			}
+		}
+	},
+	"settings": {
+		"number_of_replicas": 0,
+		"number_of_shards": 5
+	}
+}

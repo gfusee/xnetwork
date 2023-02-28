@@ -1,0 +1,26 @@
+{
+	"index_patterns": [
+		"receipts-*"
+	],
+	"mappings": {
+		"properties": {
+			"timestamp": {
+				"format": "epoch_second",
+				"type": "date"
+			}
+		}
+	},
+	"settings": {
+		"index": {
+			"sort.field": [
+				"timestamp"
+			],
+			"sort.order": [
+				"desc"
+			]
+		},
+		"number_of_replicas": 0,
+		"number_of_shards": 3,
+		"opendistro.index_state_management.rollover_alias": "receipts"
+	}
+}

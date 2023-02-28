@@ -1,0 +1,8 @@
+# Proxy url used to fetch network config + account details; e.g.: https://gateway.elrond.com for mainnet
+ProxyUrl = ""
+
+# Each generated transaction will delete exactly the same number of token nonces specified by this param
+TokensToDeletePerTransaction = 100
+
+# AdditionalGasLimit for each tx (should be adjusted based on TokensToDeletePerTransaction)
+AdditionalGasLimit = 500000
