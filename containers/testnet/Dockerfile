@@ -29,6 +29,9 @@ RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
 RUN echo "16"
 COPY change-prefs.py change-prefs.py
+COPY replace-config.py replace-config.py
+
+COPY start-testnet.py .
 
 RUN rm -rf testnet
 
