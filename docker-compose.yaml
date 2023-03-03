@@ -4,6 +4,9 @@ services:
     platform: linux/x86_64
     ports:
       - "7950:7950"
+    environment:
+      - MX_LT_ELASTIC_ENABLED
+      - MX_LT_NUM_SHARDS
 
   mysql:
     image: "mysql:latest"
