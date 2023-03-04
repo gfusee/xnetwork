@@ -3,16 +3,14 @@ import time
 
 def wait_for_vm_query_ready():
     url = "http://testnet:7950/vm-values/query"
-    payload1 = '{"args":[],"caller":"erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllst77y4l","funcName":"getQueueRegisterNonceAndRewardAddress","scAddress":"erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqllls0lczs7"}'
-    payload2 = '{"args":[],"funcName":"getAllContractAddresses","scAddress":"erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqylllslmq6y6"}'
+    payload = '{"args":[],"caller":"erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllst77y4l","funcName":"getQueueRegisterNonceAndRewardAddress","scAddress":"erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqllls0lczs7"}'
     headers = {
         'Content-Type': 'application/json'
     }
 
     while True:
-        response1 = requests.request("POST", url, headers=headers, data=payload1)
-        response2 = requests.request("POST", url, headers=headers, data=payload2)
-        if response1.status_code == 200 and response2.status_code == 200:
+        response = requests.request("POST", url, headers=headers, data=payload)
+        if response.status_code == 200:
             break
         time.sleep(1)
 
