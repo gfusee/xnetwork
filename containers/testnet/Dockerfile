@@ -7,6 +7,13 @@ COPY change-prefs.py change-prefs.py
 
 COPY replace-testnet-toml.py replace-testnet-toml.py
 
+COPY genesis.json genesis.json
+COPY create-wallet.py create-wallet.py
+COPY change-genesis.py change-genesis.py
+COPY economics.toml economics.toml
+COPY replace-economics.py replace-economics.py
+COPY add-result.py add-result.py
+
 CMD sh run.sh
 
 

@@ -1,0 +1,156 @@
+[
+  {
+    "nickname": "validator01",
+    "address": "erd1lgvcwjt3udzpuzajedz9malydaazwh0mg7apdd33j4a6qthyfz0q6nl2qv",
+    "supply": "2500000000000000000000",
+    "balance": "0",
+    "stakingvalue": "2500000000000000000000",
+    "delegation": {
+      "address": "",
+      "value": "0"
+    }
+  },
+  {
+    "nickname": "alice",
+    "address": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "bob",
+    "address": "erd1spyavw0956vq68xj8y4tenjpq2wd5a9p2c6j8gsz7ztyrnpxrruqzu66jx",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "carol",
+    "address": "erd1k2s324ww2g0yj38qn2ch2jwctdy8mnfxep94q9arncc6xecg3xaq6mjse8",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "dan",
+    "address": "erd1kyaqzaprcdnv4luvanah0gfxzzsnpaygsy6pytrexll2urtd05ts9vegu7",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "eve",
+    "address": "erd18tudnj2z8vjh0339yu3vrkgzz2jpz8mjq0uhgnmklnap6z33qqeszq2yn4",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "frank",
+    "address": "erd1kdl46yctawygtwg2k462307dmz2v55c605737dp3zkxh04sct7asqylhyv",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "grace",
+    "address": "erd1r69gk66fmedhhcg24g2c5kn2f2a5k4kvpr6jfw67dn2lyydd8cfswy6ede",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "heidi",
+    "address": "erd1dc3yzxxeq69wvf583gw0h67td226gu2ahpk3k50qdgzzym8npltq7ndgha",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "ivan",
+    "address": "erd13x29rvmp4qlgn4emgztd8jgvyzdj0p6vn37tqxas3v9mfhq4dy7shalqrx",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "judy",
+    "address": "erd1fggp5ru0jhcjrp5rjqyqrnvhr3sz3v2e0fm3ktknvlg7mcyan54qzccnan",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "mallory",
+    "address": "erd1z32fx8l6wk9tx4j555sxk28fm0clhr0cl88dpyam9zr7kw0hu7hsx2j524",
+    "supply": "100000000000000000000000",
+    "balance": "99900000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "100000000000000000000"
+    }
+  },
+  {
+    "nickname": "mike",
+    "address": "erd1uv40ahysflse896x4ktnh6ecx43u7cmy9wnxnvcyp7deg299a4sq6vaywa",
+    "supply": "18897500000000000000000000",
+    "balance": "18896100000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
+      "value": "1400000000000000000000"
+    }
+  },
+  {
+    "nickname": "genesis",
+    "address": "${MX_LT_GENESIS_ADDRESS}",
+    "supply": "10000000000000000000000000",
+    "balance": "10000000000000000000000000",
+    "stakingvalue": "0",
+    "delegation": {
+      "address": "",
+      "value": "0"
+    }
+  }
+]
