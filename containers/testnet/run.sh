@@ -17,9 +17,14 @@ cp create-wallet.py testnet/create-wallet.py
 cp economics.toml testnet/economics.toml
 cp genesis.json testnet/genesis.json
 cp replace-economics.py testnet/replace-economics.py
+cp systemSmartContractsConfig.toml testnet/systemSmartContractsConfig.toml
+cp replace-system-contracts-config.py testnet/replace-system-contracts-config.py
 
 echo "Changing nodes economics..."
 cd testnet && sudo python3 replace-economics.py && cd ..
+
+echo "Changing nodes system contracts config..."
+cd testnet && sudo python3 replace-system-contracts-config.py && cd ..
 
 echo "Changing nodes preferences..."
 cd testnet && sudo python3 change-prefs.py "$MX_LT_ELASTIC_ENABLED" && cd ..

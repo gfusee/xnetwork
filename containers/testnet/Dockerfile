@@ -13,6 +13,8 @@ COPY change-genesis.py change-genesis.py
 COPY economics.toml economics.toml
 COPY replace-economics.py replace-economics.py
 COPY add-result.py add-result.py
+COPY systemSmartContractsConfig.toml systemSmartContractsConfig.toml
+COPY replace-system-contracts-config.py replace-system-contracts-config.py
 
 CMD sh run.sh
 

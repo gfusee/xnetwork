@@ -7,6 +7,7 @@ services:
     environment:
       - MX_LT_ELASTIC_ENABLED
       - MX_LT_NUM_SHARDS
+      - MX_LT_CUSTOM_EGLD_ADDRESS
 
   mysql:
     image: "mysql:latest"
