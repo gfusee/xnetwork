@@ -1,8 +1,8 @@
 import {ListQuestion, Question} from "inquirer"
 import {CLIQuestion} from "../question.js"
-import {ShadowForkFeaturesQuestion} from "../features/shadowForkFeaturesQuestion";
+import {ShadowForkFeaturesQuestion} from "../features/shadowForkFeaturesQuestion.js";
 
-export class ShadowForkTypeQuestion extends CLIQuestion {
+export class ShadowForkNetworkQuestion extends CLIQuestion {
     get question(): Question {
         const question: ListQuestion = {
             type: 'list',
@@ -17,13 +17,11 @@ export class ShadowForkTypeQuestion extends CLIQuestion {
     cliChoices = [
         {
             choice: 'Mainnet',
-            onAnswer: () => {},
-            nextQuestion: new ShadowForkFeaturesQuestion()
+            nextQuestions: [new ShadowForkFeaturesQuestion()]
         },
         {
             choice: 'Devnet',
-            onAnswer: () => {},
-            nextQuestion: new ShadowForkFeaturesQuestion()
+            nextQuestions: [new ShadowForkFeaturesQuestion()]
         }
     ]
 }
