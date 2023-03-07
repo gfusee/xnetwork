@@ -45,7 +45,7 @@ export class RunnerQuestion extends CLIQuestion {
     private async run(config: CLIConfig) {
         try {
             const removingNetworkSpinner = ora('Removing the previous network...').start()
-            await execCustomInRepo(`docker-compose down`, true)
+            await execCustomInRepo(`docker-compose down`, false)
             removingNetworkSpinner.succeed('Removed the previous network successfully')
 
 
@@ -80,7 +80,7 @@ export class RunnerQuestion extends CLIQuestion {
             }
 
             const startingNetworkSpinner = ora('Starting network...').start()
-            await execCustomInRepo(`docker-compose up -d testnet`, true, {
+            await execCustomInRepo(`docker-compose up -d testnet`, false, {
                 env: {
                     ...process.env,
                     "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),

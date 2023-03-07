@@ -11,6 +11,9 @@
   "bin": {
     "xnetwork": "dist/index.js"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "keywords": [],
   "author": "gfusee",
   "license": "GNU GENERAL PUBLIC LICENSE",
