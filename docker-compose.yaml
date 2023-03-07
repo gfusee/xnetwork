@@ -39,7 +39,6 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.11.8
-    container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest

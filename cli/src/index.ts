@@ -7,12 +7,14 @@ import {NumberShardsQuestion} from "./questions/fresh/numberShardsQuestion.js"
 import {DockerPrerequisites} from "./prerequisites/dockerPrerequisites.js"
 import {dontIndent} from "./utils/strings/dontIndent.js";
 import chalk from "chalk";
+import {GitRepoPrerequisites} from "./prerequisites/gitRepoPrerequisites.js"
 
 async function main() {
     console.log('Checking prerequisites...')
 
     try {
         await (new DockerPrerequisites()).check()
+        await (new GitRepoPrerequisites(hasNoCacheOption())).check()
     } catch (e) {
         if (typeof e === 'string') {
             console.log(e)
@@ -37,6 +39,10 @@ async function main() {
 
     const resultLogger = new ResultLogger()
     await resultLogger.printResults(config)
+}
+
+function hasNoCacheOption(): boolean {
+    return process.argv.includes('--no-cache');
 }
 
 main().then(() => console.log('Done'))

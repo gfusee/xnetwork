@@ -1,7 +1,7 @@
 import {CLIQuestion} from "../question.js"
 import {Answers, ListQuestion, Question} from "inquirer"
 import {CLIConfig} from "../../config/config.js"
-import {execCustom, ExecError} from "../../utils/exec.js"
+import {execCustomInRepo, ExecError} from "../../utils/exec.js"
 import ora from "ora"
 import {waitForVMQueryToBeReady} from "../../utils/healthchecks/waitForVMQueryToBeReady.js";
 import {waitForAPIToBeReady} from "../../utils/healthchecks/waitForAPIToBeReady.js";
@@ -45,42 +45,42 @@ export class RunnerQuestion extends CLIQuestion {
     private async run(config: CLIConfig) {
         try {
             const removingNetworkSpinner = ora('Removing the previous network...').start()
-            await execCustom(`docker-compose down`, true)
+            await execCustomInRepo(`docker-compose down`, true)
             removingNetworkSpinner.succeed('Removed the previous network successfully')
 
 
             if (config.shouldHaveElasticSearch) {
                 const startingElasticSearchSpinner = ora('Starting ElasticSearch container...').start()
-                await execCustom(`docker-compose up -d elastic`)
+                await execCustomInRepo(`docker-compose up -d elastic`)
                 startingElasticSearchSpinner.succeed('Started ElasticSearch container')
             }
 
             if (config.shouldHaveMySQL) {
                 const startingMySQLSpinner = ora('Starting MySQL container...').start()
-                await execCustom(`docker-compose up -d mysql`)
+                await execCustomInRepo(`docker-compose up -d mysql`)
                 startingMySQLSpinner.succeed('Started MySQL container')
             }
 
             if (config.shouldHaveRedis) {
                 const startingRedisSpinner = ora('Starting Redis container...').start()
-                await execCustom(`docker-compose up -d redis`)
+                await execCustomInRepo(`docker-compose up -d redis`)
                 startingRedisSpinner.succeed('Started Redis container')
             }
 
             if (config.shouldHaveRabbitMQ) {
                 const startingRabbitMQSpinner = ora('Starting RabbitMQ container...').start()
-                await execCustom(`docker-compose up -d rabbitmq`)
+                await execCustomInRepo(`docker-compose up -d rabbitmq`)
                 startingRabbitMQSpinner.succeed('Started RabbitMQ container')
             }
 
             if (config.shouldHaveApi) {
                 const startingApiSpinner = ora('Starting API container...').start()
-                await execCustom(`docker-compose up -d api`)
+                await execCustomInRepo(`docker-compose up -d api`)
                 startingApiSpinner.succeed('Started API container')
             }
 
             const startingNetworkSpinner = ora('Starting network...').start()
-            await execCustom(`docker-compose up -d testnet`, true, {
+            await execCustomInRepo(`docker-compose up -d testnet`, true, {
                 env: {
                     ...process.env,
                     "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),

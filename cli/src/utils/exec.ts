@@ -1,6 +1,7 @@
 import {ExecException, ExecOptions} from "child_process"
 import { exec } from "child_process"
 import { createInterface } from 'readline'
+import {Constants} from "../config/constants.js";
 
 export type ExecError = {
     error: ExecException,
@@ -38,4 +39,15 @@ export function execCustom(
         }
     })
 
+}
+
+export function execCustomInRepo(
+    command: string,
+    logStdout?: boolean,
+    options?: ExecOptions
+): Promise<{stdout: string | Buffer, stderr: string | Buffer}> {
+    return execCustom(command, logStdout, {
+        cwd: Constants.CLI_USER_REPO_PATH,
+        ...options
+    })
 }
