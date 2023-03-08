@@ -19,10 +19,11 @@ export class GitRepoPrerequisites implements Prerequisites {
         if (!isRepoAlreadyDownloaded) {
             try {
                 gitCloneSpinner.info(`Downloading necessary files from ${Constants.REPO_URL}...`)
-                await execCustom(`git clone ${Constants.REPO_URL} ${Constants.CLI_USER_REPO_PATH}`)
+                await execCustom(`git clone -b ${Constants.REPO_BRANCH} ${Constants.REPO_URL} ${Constants.CLI_USER_REPO_PATH}`)
                 gitCloneSpinner.succeed('Files downloaded')
             } catch (error) {
                 gitCloneSpinner.fail(`Error while cloning xnetwork repo: ${Constants.REPO_URL}`)
+                console.error(error)
                 throw error
             }
         } else {

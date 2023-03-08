@@ -8,8 +8,20 @@ import {DockerPrerequisites} from "./prerequisites/dockerPrerequisites.js"
 import {dontIndent} from "./utils/strings/dontIndent.js";
 import chalk from "chalk";
 import {GitRepoPrerequisites} from "./prerequisites/gitRepoPrerequisites.js"
+import { program } from 'commander'
 
 async function main() {
+
+    program
+        .name('xnetwork')
+        .version('0.0.1')
+        .description('An all-in-one tool for creating and managing your own MultiversX network')
+        .option('--no-cache', 'Do not use cache when downloading files')
+        .option('--custom-repo-path <path>', 'Fetch files from a custom repository')
+        .option('--custom-repo-branch <branch>', 'Fetch files from a custom repository branch')
+
+    await program.parse(process.argv)
+
     console.log('Checking prerequisites...')
 
     try {
