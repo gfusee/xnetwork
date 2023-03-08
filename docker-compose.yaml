@@ -4,6 +4,10 @@ services:
     platform: linux/x86_64
     ports:
       - "7950:7950"
+    environment:
+      - MX_LT_ELASTIC_ENABLED
+      - MX_LT_NUM_SHARDS
+      - MX_LT_CUSTOM_EGLD_ADDRESS
 
   mysql:
     image: "mysql:latest"
@@ -35,7 +39,6 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.11.8
-    container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
