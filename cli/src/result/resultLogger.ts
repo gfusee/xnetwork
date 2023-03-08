@@ -1,6 +1,6 @@
 import {CLIConfig} from "../config/config.js";
 import chalk from "chalk";
-import {execCustom} from "../utils/exec.js";
+import {execCustom, execCustomInRepo} from "../utils/exec.js";
 import {dontIndent} from "../utils/strings/dontIndent.js";
 
 type Result = {
@@ -11,7 +11,7 @@ type Result = {
 export class ResultLogger {
     async printResults(config: CLIConfig) {
 
-        const containerResultsRaw = (await execCustom("docker-compose exec testnet cat /home/ubuntu/results.json")).stdout.toString()
+        const containerResultsRaw = (await execCustomInRepo("docker-compose exec testnet cat /home/ubuntu/results.json")).stdout.toString()
         const containerResults: Result = JSON.parse(containerResultsRaw)
 
         let resultString = `${chalk.bold.green("Local testnet successfully started !")}`
@@ -35,7 +35,7 @@ export class ResultLogger {
         }
 
         if (containerResults.genesisEgldPemPath) {
-            const addressPrivateKey = (await execCustom(`docker-compose exec testnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
+            const addressPrivateKey = (await execCustomInRepo(`docker-compose exec testnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
             resultString += `
             An address with 1,000,000 EGLD was generated for you. Here are the details:
             
