@@ -12,7 +12,7 @@ const __dirname = dirname(__filename)
 export class Constants {
     static CLI_USER_PATH = path.join(os.homedir(), '.xnetwork')
     static get REPO_URL(): string {
-        return program.opts().customRepoPath ?? "git@github.com:gfusee/xnetwork.git"
+        return program.opts().customRepoPath ?? "https://github.com/gfusee/xnetwork.git"
     }
 
     static get REPO_BRANCH(): string | undefined {
@@ -23,8 +23,8 @@ export class Constants {
         return path.join(Constants.CLI_USER_PATH, '.repo')
     }
 
-    static isNoCacheRequested(): string {
-        return program.opts().cache ?? true
+    static isNoCacheRequested(): boolean {
+        return !(program.opts().cache ?? true)
     }
 
     static getPackageJson(): { version: string } {
