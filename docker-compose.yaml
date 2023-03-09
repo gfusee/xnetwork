@@ -27,7 +27,8 @@ services:
   elastic:
     image: elasticsearch:7.17.8
     environment:
-      - discovery.type=single-node
+      ES_JAVA_OPTS: "-Xms4g -Xmx4g"
+      discovery.type: single-node
 
   redis:
     image: "redis:alpine"

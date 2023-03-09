@@ -17,8 +17,6 @@ def replace_file():
         with open(external_toml_path, 'r') as f:
             filedata = f.read()
 
-        print("Total supply: " + str(total_supply))
-
         filedata = filedata.replace('GenesisTotalSupply = "${MX_RESULT_TOTAL_SUPPLY}"',
                                     f'GenesisTotalSupply = "{total_supply}"')
 
