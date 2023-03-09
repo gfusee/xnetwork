@@ -1,4 +1,4 @@
-# MultiversX full local testnet environment
+# xNetwork
 
 This project provides an easy way to run a local testnet of MultiversX and its associated API, with no configuration required.
 While you can run a local testnet of MultiversX with the [MultiversX CLI](
