@@ -3,18 +3,19 @@ FROM --platform=linux/x86_64 ghcr.io/gfusee/mx-testnet-docker:main
 COPY wait-for-it.sh .
 RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
-COPY change-prefs.py change-prefs.py
+COPY change_prefs.py change_prefs.py
 
-COPY replace-testnet-toml.py replace-testnet-toml.py
+COPY replace_testnet_toml.py replace_testnet_toml.py
 
 COPY genesis.json genesis.json
-COPY create-wallet.py create-wallet.py
-COPY change-genesis.py change-genesis.py
+COPY create_wallet.py create_wallet.py
+COPY change_genesis.py change_genesis.py
 COPY economics.toml economics.toml
-COPY replace-economics.py replace-economics.py
-COPY add-result.py add-result.py
+COPY replace_economics.py replace_economics.py
+COPY add_result.py add_result.py
+COPY read_result.py read_result.py
 COPY systemSmartContractsConfig.toml systemSmartContractsConfig.toml
-COPY replace-system-contracts-config.py replace-system-contracts-config.py
+COPY replace_system_contracts_config.py replace_system_contracts_config.py
 
 CMD sh run.sh
 

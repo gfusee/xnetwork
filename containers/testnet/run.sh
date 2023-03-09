@@ -4,33 +4,34 @@ if [ "$MX_LT_ELASTIC_ENABLED" = "true" ]; then
 fi
 
 echo "Replacing testnet.toml..."
-sudo python3 replace-testnet-toml.py "$MX_LT_NUM_SHARDS"
+sudo python3 replace_testnet_toml.py "$MX_LT_NUM_SHARDS"
 
 echo "Compiling nodes..."
 rm -rf testnet
 mxpy testnet config
 
 echo "Copying files..."
-cp change-prefs.py testnet/change-prefs.py
-cp change-genesis.py testnet/change-genesis.py
-cp create-wallet.py testnet/create-wallet.py
+cp read_result.py testnet/read_result.py
+cp change_prefs.py testnet/change_prefs.py
+cp change_genesis.py testnet/change_genesis.py
+cp create_wallet.py testnet/create_wallet.py
 cp economics.toml testnet/economics.toml
 cp genesis.json testnet/genesis.json
-cp replace-economics.py testnet/replace-economics.py
+cp replace_economics.py testnet/replace_economics.py
 cp systemSmartContractsConfig.toml testnet/systemSmartContractsConfig.toml
-cp replace-system-contracts-config.py testnet/replace-system-contracts-config.py
-
-echo "Changing nodes economics..."
-cd testnet && sudo python3 replace-economics.py && cd ..
+cp replace_system_contracts_config.py testnet/replace_system_contracts_config.py
 
 echo "Changing nodes system contracts config..."
-cd testnet && sudo python3 replace-system-contracts-config.py && cd ..
+cd testnet && sudo python3 replace_system_contracts_config.py && cd ..
 
 echo "Changing nodes preferences..."
-cd testnet && sudo python3 change-prefs.py "$MX_LT_ELASTIC_ENABLED" && cd ..
+cd testnet && sudo python3 change_prefs.py "$MX_LT_ELASTIC_ENABLED" && cd ..
 
 echo "Changing nodes genesis..."
-cd testnet && sudo python3 change-genesis.py "$MX_LT_CUSTOM_EGLD_ADDRESS" && cd ..
+cd testnet && sudo python3 change_genesis.py "$MX_LT_CUSTOM_EGLD_ADDRESS" "$MX_LT_NUM_SHARDS" && cd ..
+
+echo "Changing nodes economics..."
+cd testnet && sudo python3 replace_economics.py "$MX_RESULT_TOTAL_SUPPLY" && cd ..
 
 echo "Running testnet..."
 mxpy testnet start
