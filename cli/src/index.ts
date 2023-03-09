@@ -26,7 +26,7 @@ async function main() {
 
     try {
         await (new DockerPrerequisites()).check()
-        await (new GitRepoPrerequisites(hasNoCacheOption())).check()
+        await (new GitRepoPrerequisites()).check()
     } catch (e) {
         if (typeof e === 'string') {
             console.log(e)
@@ -51,10 +51,6 @@ async function main() {
 
     const resultLogger = new ResultLogger()
     await resultLogger.printResults(config)
-}
-
-function hasNoCacheOption(): boolean {
-    return process.argv.includes('--no-cache');
 }
 
 main().then(() => console.log('Done'))

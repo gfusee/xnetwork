@@ -1,15 +1,13 @@
 import {Prerequisites} from "./prerequisites"
 import {Constants} from "../config/constants.js"
 import fs from 'fs/promises'
-import {execCustom} from "../utils/exec.js"
+import {execCustom, execCustomInRepo} from "../utils/exec.js"
 import ora from "ora"
 
 export class GitRepoPrerequisites implements Prerequisites {
 
-    constructor(private noCache: boolean) {}
-
     async check() {
-        if (this.noCache) {
+        if (await this.needToDeleteFiles()) {
             await this.deleteRepo()
         }
 
@@ -19,10 +17,10 @@ export class GitRepoPrerequisites implements Prerequisites {
         if (!isRepoAlreadyDownloaded) {
             try {
                 gitCloneSpinner.info(`Downloading necessary files from ${Constants.REPO_URL}...`)
-                await execCustom(`git clone -b ${Constants.REPO_BRANCH} ${Constants.REPO_URL} ${Constants.CLI_USER_REPO_PATH}`)
+                await execCustom(`git clone --branch ${Constants.REPO_BRANCH} ${Constants.REPO_URL} ${Constants.CLI_USER_REPO_PATH}`)
                 gitCloneSpinner.succeed('Files downloaded')
             } catch (error) {
-                gitCloneSpinner.fail(`Error while cloning xnetwork repo: ${Constants.REPO_URL}`)
+                gitCloneSpinner.fail(`Error while cloning xnetwork repo: ${Constants.REPO_URL}, branch/tag = ${Constants.REPO_BRANCH}`)
                 console.error(error)
                 throw error
             }
@@ -33,7 +31,7 @@ export class GitRepoPrerequisites implements Prerequisites {
 
     private async checkDirectory(path: string): Promise<boolean> {
         try {
-            const stat = await fs.stat(Constants.CLI_USER_REPO_PATH)
+            const stat = await fs.stat(path)
             return stat.isDirectory()
         } catch (error) {
             return false
@@ -49,6 +47,34 @@ export class GitRepoPrerequisites implements Prerequisites {
             deleteSpinner.fail('Error while deleting files')
             throw error
         }
+    }
+
+    private async needToDeleteFiles(): Promise<boolean> {
+        if (Constants.isNoCacheRequested()) {
+            return true
+        }
+
+        const gitStatusSpinner = ora('Checking if files are up to date...').start()
+        try {
+            const gitCurrentTag = (await execCustomInRepo(`git describe --tags --abbrev=0`, false, {cwd: Constants.CLI_USER_REPO_PATH})).stdout.toString()
+            const gitCurrentTagVersion = gitCurrentTag.replace('v', '').trim()
+            const packageVersion = Constants.getPackageJson().version.trim()
+            if (gitCurrentTagVersion !== packageVersion) {
+                gitStatusSpinner.fail(`Files are not up to date. Current files version: ${gitCurrentTagVersion} - Package version: ${packageVersion}. Deleting the repo and downloading it again...`)
+                return true
+            }
+
+            gitStatusSpinner.succeed('Files are up to date')
+        } catch (error) {
+            if (!(await this.checkDirectory(Constants.CLI_USER_REPO_PATH))) {
+                gitStatusSpinner.succeed('Files are not downloaded yet')
+                return true
+            }
+            gitStatusSpinner.fail('Error while checking if repo is up to date')
+            throw error
+        }
+
+        return false
     }
 
 }
