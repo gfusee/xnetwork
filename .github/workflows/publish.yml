@@ -14,10 +14,13 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies and build 🔧
+        working-directory: ./cli
         run: npm ci && npm run build
       - name: Change package version according to release tag
+        working-directory: ./cli
         run: npm version ${{ github.ref_name }}
       - name: Publish package on NPM 📦
         run: npm publish
+        working-directory: ./cli
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

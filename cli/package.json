@@ -4,7 +4,8 @@
   "description": "An all-in-one tool for creating and managing your own MultiversX network",
   "type": "module",
   "scripts": {
-    "prepare": "rm -rf dist && tsc",
+    "prepare": "rm -rf dist && npx tsc",
+    "build": "rm -rf dist && npx tsc",
     "start": "npx tsc && node dist/index.js"
   },
   "bin": {
