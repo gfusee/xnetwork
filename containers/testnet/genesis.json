@@ -1,16 +1,5 @@
 [
   {
-    "nickname": "validator01",
-    "address": "erd1lgvcwjt3udzpuzajedz9malydaazwh0mg7apdd33j4a6qthyfz0q6nl2qv",
-    "supply": "2500000000000000000000",
-    "balance": "0",
-    "stakingvalue": "2500000000000000000000",
-    "delegation": {
-      "address": "",
-      "value": "0"
-    }
-  },
-  {
     "nickname": "alice",
     "address": "erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th",
     "supply": "100000000000000000000000",
@@ -134,23 +123,12 @@
   {
     "nickname": "mike",
     "address": "erd1uv40ahysflse896x4ktnh6ecx43u7cmy9wnxnvcyp7deg299a4sq6vaywa",
-    "supply": "18897500000000000000000000",
-    "balance": "18896100000000000000000000",
+    "supply": "18887500000000000000000000",
+    "balance": "18886100000000000000000000",
     "stakingvalue": "0",
     "delegation": {
       "address": "erd1qqqqqqqqqqqqqpgqak8zt22wl2ph4tswtyc39namqx6ysa2sd8ss4xmlj3",
       "value": "1400000000000000000000"
-    }
-  },
-  {
-    "nickname": "genesis",
-    "address": "${MX_LT_GENESIS_ADDRESS}",
-    "supply": "10000000000000000000000000",
-    "balance": "10000000000000000000000000",
-    "stakingvalue": "0",
-    "delegation": {
-      "address": "",
-      "value": "0"
     }
   }
 ]

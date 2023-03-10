@@ -51,42 +51,40 @@ export class RunnerQuestion extends CLIQuestion {
 
             if (config.shouldHaveElasticSearch) {
                 const startingElasticSearchSpinner = ora('Starting ElasticSearch container...').start()
-                await execCustomInRepo(`docker-compose up -d elastic`)
+                await this.runContainer('elastic')
                 startingElasticSearchSpinner.succeed('Started ElasticSearch container')
             }
 
             if (config.shouldHaveMySQL) {
                 const startingMySQLSpinner = ora('Starting MySQL container...').start()
-                await execCustomInRepo(`docker-compose up -d mysql`)
+                await this.runContainer('mysql')
                 startingMySQLSpinner.succeed('Started MySQL container')
             }
 
             if (config.shouldHaveRedis) {
                 const startingRedisSpinner = ora('Starting Redis container...').start()
-                await execCustomInRepo(`docker-compose up -d redis`)
+                await this.runContainer('redis')
                 startingRedisSpinner.succeed('Started Redis container')
             }
 
             if (config.shouldHaveRabbitMQ) {
                 const startingRabbitMQSpinner = ora('Starting RabbitMQ container...').start()
-                await execCustomInRepo(`docker-compose up -d rabbitmq`)
+                await this.runContainer('rabbitmq')
                 startingRabbitMQSpinner.succeed('Started RabbitMQ container')
             }
 
             if (config.shouldHaveApi) {
                 const startingApiSpinner = ora('Starting API container...').start()
-                await execCustomInRepo(`docker-compose up -d api`)
+                await this.runContainer('api')
                 startingApiSpinner.succeed('Started API container')
             }
 
             const startingNetworkSpinner = ora('Starting network...').start()
-            await execCustomInRepo(`docker-compose up -d testnet`, false, {
-                env: {
-                    ...process.env,
-                    "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),
-                    "MX_LT_ELASTIC_ENABLED": config.shouldHaveElasticSearch.toString(),
-                    "MX_LT_CUSTOM_EGLD_ADDRESS": config.initialEGLDAddress ?? ""
-                }
+            await this.runContainer('testnet', {
+                ...process.env,
+                "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),
+                "MX_LT_ELASTIC_ENABLED": config.shouldHaveElasticSearch.toString(),
+                "MX_LT_CUSTOM_EGLD_ADDRESS": config.initialEGLDAddress ?? ""
             })
             startingNetworkSpinner.succeed('Started network successfully')
 
@@ -113,5 +111,10 @@ export class RunnerQuestion extends CLIQuestion {
 
             throw e
         }
+    }
+
+    private async runContainer(containerName: string, env?: NodeJS.ProcessEnv) {
+        await execCustomInRepo(`docker-compose build ${containerName} --no-cache`, false, {env: env})
+        await execCustomInRepo(`docker-compose up -d ${containerName}`, false, {env: env})
     }
 }

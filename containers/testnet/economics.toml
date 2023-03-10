@@ -1,6 +1,6 @@
 #Economics config of the node
 [GlobalSettings]
-GenesisTotalSupply = "30000000000000000000000000" #30MIL eGLD
+GenesisTotalSupply = "${MX_RESULT_TOTAL_SUPPLY}"
 MinimumInflation   = 0.0
 YearSettings = [
     {Year = 1, MaximumInflation  = 0.10845130},

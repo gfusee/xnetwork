@@ -15,10 +15,18 @@ export class NumberShardsQuestion extends CLIQuestion {
     cliChoices = []
 
     override async overrideActionForAnswers(choices: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+        const maxShards = 3
+
         if (choices.numberShards < 1) {
             const errorMessage = 'Number of shards must be greater than 0'
             console.error(errorMessage)
-            throw new Error(errorMessage)
+            return [new NumberShardsQuestion()]
+        }
+
+        if (choices.numberShards > maxShards) {
+            const errorMessage = `Maximum number of shards is ${maxShards}`
+            console.error(errorMessage)
+            return [new NumberShardsQuestion()]
         }
 
         config.numberOfShards = choices.numberShards
