@@ -31,6 +31,6 @@
     "@types/inquirer": "^9.0.3"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   }
 }
