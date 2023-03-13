@@ -114,7 +114,7 @@ export class RunnerQuestion extends CLIQuestion {
     }
 
     private async runContainer(containerName: string, env?: NodeJS.ProcessEnv) {
-        await execCustomInRepo(`docker-compose build ${containerName} --no-cache`, false, {env: env})
+        await execCustomInRepo(`docker-compose build --no-cache ${containerName}`, false, {env: env})
         await execCustomInRepo(`docker-compose up -d ${containerName}`, false, {env: env})
     }
 }
