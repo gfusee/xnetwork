@@ -6,7 +6,7 @@ import {CustomAddressToGiveEGLDQuestion} from "./customAddressToGiveEGLDQuestion
 
 export class FreshTestnetFeaturesQuestion extends FeaturesQuestion {
 
-    static readonly giveToCustomAddressChoice = 'Give 1,000,000 EGLD to a custom address'
+    static readonly giveToCustomAddressChoice = 'Give 1,000,000 EGLD to a custom address (otherwise a new one will be generated for you)'
     cliChoices = [
         {
             choice: FreshTestnetFeaturesQuestion.giveToCustomAddressChoice,
