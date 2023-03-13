@@ -88,7 +88,7 @@ export class RunnerQuestion extends CLIQuestion {
             })
             startingNetworkSpinner.succeed('Started network successfully')
 
-            const networkReadySpinner = ora('Waiting for network to be ready...').start()
+            const networkReadySpinner = ora('Waiting for network to be ready... (this may take up to 30 minutes)').start()
             await waitForVMQueryToBeReady()
             networkReadySpinner.succeed('Network is ready')
 
