@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 import {getDefaultConfig} from "./config/config.js"
-import {RunnerQuestion} from "./questions/runner/runnerQuestion.js"
-import {ResultLogger} from "./result/resultLogger.js"
-import {NumberShardsQuestion} from "./questions/fresh/numberShardsQuestion.js"
 import {DockerPrerequisites} from "./prerequisites/dockerPrerequisites.js"
 import {dontIndent} from "./utils/strings/dontIndent.js";
 import chalk from "chalk";
 import {GitRepoPrerequisites} from "./prerequisites/gitRepoPrerequisites.js"
 import { program } from 'commander'
+import {StartQuestion} from "./questions/startQuestion.js";
 
 async function main() {
 
@@ -46,11 +44,7 @@ async function main() {
     console.log(dontIndent(welcomeMessage))
 
     const config = getDefaultConfig()
-    await (new NumberShardsQuestion()).process(config)
-    await (new RunnerQuestion()).process(config)
-
-    const resultLogger = new ResultLogger()
-    await resultLogger.printResults(config)
+    await (new StartQuestion()).process(config)
 }
 
 main().then(() => console.log('Done'))

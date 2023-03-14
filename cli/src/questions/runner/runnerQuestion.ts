@@ -5,36 +5,26 @@ import {execCustomInRepo, ExecError} from "../../utils/exec.js"
 import ora from "ora"
 import {waitForVMQueryToBeReady} from "../../utils/healthchecks/waitForVMQueryToBeReady.js";
 import {waitForAPIToBeReady} from "../../utils/healthchecks/waitForAPIToBeReady.js";
+import {removeExistingNetwork} from "../../utils/docker/removeExistingNetwork.js";
+import {ResultLogger} from "../../result/resultLogger.js";
 
 export class RunnerQuestion extends CLIQuestion {
 
     private static yesChoice = 'Yes'
     private static noChoice = 'No'
 
-    get question(): Question {
-        const question: ListQuestion = {
+    override async getQuestion(): Promise<Question> {
+        const listQuestion: ListQuestion = {
             type: 'list',
             name: 'choice',
             message: 'All set, do you want to run the network ?',
-            choices: this.cliChoices.map(cliChoice => cliChoice.choice)
+            choices: [RunnerQuestion.yesChoice, RunnerQuestion.noChoice]
         }
 
-        return question
+        return listQuestion
     }
 
-    shouldOverrideActionForChoices = true
-    cliChoices = [
-        {
-            choice: RunnerQuestion.yesChoice,
-            nextQuestions: undefined
-        },
-        {
-            choice: RunnerQuestion.noChoice,
-            nextQuestions: undefined
-        }
-    ]
-
-    override async overrideActionForAnswers(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
         if (answers.choice === RunnerQuestion.yesChoice) {
             await this.run(config)
         }
@@ -44,10 +34,7 @@ export class RunnerQuestion extends CLIQuestion {
 
     private async run(config: CLIConfig) {
         try {
-            const removingNetworkSpinner = ora('Removing the previous network...').start()
-            await execCustomInRepo(`docker-compose down`, false)
-            removingNetworkSpinner.succeed('Removed the previous network successfully')
-
+            await removeExistingNetwork()
 
             if (config.shouldHaveElasticSearch) {
                 const startingElasticSearchSpinner = ora('Starting ElasticSearch container...').start()
@@ -97,6 +84,9 @@ export class RunnerQuestion extends CLIQuestion {
                 await waitForAPIToBeReady()
                 startingApiHealthCheckSpinner.succeed('API is ready')
             }
+
+            const resultLogger = new ResultLogger()
+            await resultLogger.printResults(config)
         } catch (e) {
             try {
                 const error = e as ExecError
