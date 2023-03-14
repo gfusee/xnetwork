@@ -1,39 +1,19 @@
 import inquirer, {Answers, Question} from "inquirer"
 import {CLIConfig} from "../config/config";
 
-export type CLIChoice = {choice: string, nextQuestions: CLIQuestion[] | undefined, onAnswer?: (config: CLIConfig) => void | Promise<void>}
+export type CLIChoice = string | inquirer.Separator
 
 export abstract class CLIQuestion {
 
-    abstract question: Question
-    abstract cliChoices: CLIChoice[]
-
-    shouldOverrideActionForChoices: boolean = false
+    abstract getQuestion(): Promise<Question>
 
     async process(config: CLIConfig) {
-        const response = await inquirer.prompt([this.question])
-        const cliChoice = this.cliChoices.find(cliChoice => cliChoice.choice === response.choice)
+        const response = await inquirer.prompt([await this.getQuestion()])
 
-        let nextQuestions: CLIQuestion[] = []
-
-        if (this.shouldOverrideActionForChoices) {
-            const actionResults = await this.overrideActionForAnswers(response, config)
-
-            if (actionResults) {
-                nextQuestions.push(...actionResults)
-            }
-        } else {
-            if (!cliChoice) {
-                throw new Error(`Unknown choice: ${response.choice}`)
-            }
-
-            if (cliChoice.onAnswer) {
-                await cliChoice.onAnswer(config)
-            }
-
-            if (cliChoice.nextQuestions) {
-                nextQuestions.push(...cliChoice.nextQuestions)
-            }
+        const nextQuestions: CLIQuestion[] = []
+        const actionResults = await this.handleAnswer(response, config)
+        if (actionResults) {
+            nextQuestions.push(...actionResults)
         }
 
         for (const nextQuestion of nextQuestions) {
@@ -41,7 +21,7 @@ export abstract class CLIQuestion {
         }
     }
 
-    async overrideActionForAnswers(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
         return undefined
     }
 }
