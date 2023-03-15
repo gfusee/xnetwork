@@ -1,18 +1,19 @@
 import {CLIConfig} from "../config/config.js";
 import chalk from "chalk";
-import {execCustom, execCustomInRepo} from "../utils/exec.js";
+import {execCustomInRepo} from "../utils/exec.js";
 import {dontIndent} from "../utils/strings/dontIndent.js";
-
-type Result = {
-    genesisEgldAddress: string,
-    genesisEgldPemPath?: string,
-}
+import {getNetworkState} from "../utils/docker/getNetworkState.js";
 
 export class ResultLogger {
     async printResults(config: CLIConfig) {
 
-        const containerResultsRaw = (await execCustomInRepo("docker-compose exec testnet cat /home/ubuntu/results.json")).stdout.toString()
-        const containerResults: Result = JSON.parse(containerResultsRaw)
+        const state = await getNetworkState()
+        const containerResults = state.testnetResult
+
+        if (!containerResults) {
+            console.log(dontIndent(chalk.bold.red("Something went wrong while checking the status of the local testnet.")))
+            return
+        }
 
         let resultString = `${chalk.bold.green("Local testnet successfully started !")}`
 

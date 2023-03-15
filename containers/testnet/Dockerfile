@@ -1,5 +1,7 @@
 FROM --platform=linux/x86_64 ghcr.io/gfusee/mx-testnet-docker:main
 
+RUN sudo apt install lsof -y
+
 COPY wait-for-it.sh .
 RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
@@ -16,6 +18,9 @@ COPY add_result.py add_result.py
 COPY read_result.py read_result.py
 COPY systemSmartContractsConfig.toml systemSmartContractsConfig.toml
 COPY replace_system_contracts_config.py replace_system_contracts_config.py
+COPY pause.sh pause.sh
+
+RUN sudo chmod +x pause.sh
 
 CMD sh run.sh
 

@@ -2,21 +2,35 @@ import {CLIChoice, CLIQuestion} from "./question.js"
 import inquirer, {Answers, ListQuestion, Question} from "inquirer";
 import {CLIConfig} from "../config/config.js";
 import {NumberShardsQuestion} from "./fresh/numberShardsQuestion.js";
-import {execCustomInRepo} from "../utils/exec.js";
 import {RunnerQuestion} from "./runner/runnerQuestion.js";
 import {removeExistingNetwork} from "../utils/docker/removeExistingNetwork.js";
+import {ContainerState, getNetworkState} from "../utils/docker/getNetworkState.js";
+import {pauseExistingNetwork} from "../utils/docker/pauseExistingNetwork.js";
+import {resumeExistingNetwork} from "../utils/docker/resumeExistingNetwork.js";
 
 export class StartQuestion extends CLIQuestion {
 
     static readonly removeNetworkChoice = 'Remove existing network'
+    static readonly pauseNetworkChoice = 'Pause existing network'
+    static readonly resumeNetworkChoice = 'Resume existing network'
     static readonly createNetworkChoice = 'Create a new network'
 
     override async getQuestion(): Promise<Question> {
         let cliChoices: CLIChoice[] = []
         let cliChoiceMessage = ''
 
-        if (await this.isNetworkRunning()) {
+        const state = await getNetworkState()
+
+        if (state.testnetContainerState !== ContainerState.NonExistent) {
+
+            if (state.testnetContainerState === ContainerState.Running) {
+                cliChoices.push(StartQuestion.pauseNetworkChoice)
+            } else if (state.testnetContainerState === ContainerState.Stopped) {
+                cliChoices.push(StartQuestion.resumeNetworkChoice)
+            }
+
             cliChoices.push(StartQuestion.removeNetworkChoice)
+
             cliChoices.push(new inquirer.Separator())
             cliChoiceMessage = 'A network is already running, what do you want to do ?'
         }
@@ -34,24 +48,23 @@ export class StartQuestion extends CLIQuestion {
     }
 
     override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
-        if (answers.choice === StartQuestion.removeNetworkChoice) {
-            await removeExistingNetwork()
-        } else if (answers.choice === StartQuestion.createNetworkChoice) {
-            return [new NumberShardsQuestion(), new RunnerQuestion()]
-        }
-    }
-
-    private async isNetworkRunning(): Promise<boolean> {
-        try {
-            await execCustomInRepo(`docker-compose ps | grep -q " Up "`, false)
-            return true
-        } catch (e) {
-            return false
+        switch (answers.choice) {
+            case StartQuestion.removeNetworkChoice:
+                await removeExistingNetwork()
+                break
+            case StartQuestion.pauseNetworkChoice:
+                await pauseExistingNetwork()
+                break
+            case StartQuestion.resumeNetworkChoice:
+                await resumeExistingNetwork()
+                break
+            case StartQuestion.createNetworkChoice:
+                return [new NumberShardsQuestion(), new RunnerQuestion()]
         }
     }
 
     override async process(config: CLIConfig) {
-        if (await this.isNetworkRunning()) {
+        if ((await getNetworkState()).testnetContainerState !== ContainerState.NonExistent) {
             await super.process(config)
         } else {
             await (new NumberShardsQuestion()).process(config)
