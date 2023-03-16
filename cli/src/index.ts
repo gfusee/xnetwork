@@ -47,4 +47,4 @@ async function main() {
     await (new StartQuestion()).process(config)
 }
 
-main().then(() => console.log('Done'))
+main().then(() => console.log('\nDone'))

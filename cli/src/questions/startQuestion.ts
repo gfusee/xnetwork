@@ -7,6 +7,7 @@ import {removeExistingNetwork} from "../utils/docker/removeExistingNetwork.js";
 import {ContainerState, getNetworkState} from "../utils/docker/getNetworkState.js";
 import {pauseExistingNetwork} from "../utils/docker/pauseExistingNetwork.js";
 import {resumeExistingNetwork} from "../utils/docker/resumeExistingNetwork.js";
+import chalk from "chalk";
 
 export class StartQuestion extends CLIQuestion {
 
@@ -32,7 +33,9 @@ export class StartQuestion extends CLIQuestion {
             cliChoices.push(StartQuestion.removeNetworkChoice)
 
             cliChoices.push(new inquirer.Separator())
-            cliChoiceMessage = 'A network is already running, what do you want to do ?'
+
+            const stateChalk = state.testnetContainerState === ContainerState.Running ? chalk.bold.green('running') : chalk.bold.yellow('paused')
+            cliChoiceMessage = `A network is ${stateChalk}, what do you want to do ?`
         }
 
         cliChoices.push(StartQuestion.createNetworkChoice)

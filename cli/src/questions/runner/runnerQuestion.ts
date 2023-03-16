@@ -1,12 +1,15 @@
 import {CLIQuestion} from "../question.js"
 import {Answers, ListQuestion, Question} from "inquirer"
 import {CLIConfig} from "../../config/config.js"
-import {execCustomInRepo, ExecError} from "../../utils/exec.js"
+import {ExecError} from "../../utils/exec.js"
 import ora from "ora"
 import {waitForVMQueryToBeReady} from "../../utils/healthchecks/waitForVMQueryToBeReady.js";
 import {waitForAPIToBeReady} from "../../utils/healthchecks/waitForAPIToBeReady.js";
 import {removeExistingNetwork} from "../../utils/docker/removeExistingNetwork.js";
 import {ResultLogger} from "../../result/resultLogger.js";
+import {saveLatestConfig} from "../../utils/config/saveLatestConfig.js";
+import {upContainer} from "../../utils/docker/upContainer.js";
+import {Constants} from "../../config/constants.js";
 
 export class RunnerQuestion extends CLIQuestion {
 
@@ -38,42 +41,44 @@ export class RunnerQuestion extends CLIQuestion {
 
             if (config.shouldHaveElasticSearch) {
                 const startingElasticSearchSpinner = ora('Starting ElasticSearch container...').start()
-                await this.runContainer('elastic')
+                await upContainer(Constants.ELASTIC_CONTAINER.name)
                 startingElasticSearchSpinner.succeed('Started ElasticSearch container')
             }
 
             if (config.shouldHaveMySQL) {
                 const startingMySQLSpinner = ora('Starting MySQL container...').start()
-                await this.runContainer('mysql')
+                await upContainer(Constants.MYSQL_CONTAINER.name)
                 startingMySQLSpinner.succeed('Started MySQL container')
             }
 
             if (config.shouldHaveRedis) {
                 const startingRedisSpinner = ora('Starting Redis container...').start()
-                await this.runContainer('redis')
+                await upContainer(Constants.REDIS_CONTAINER.name)
                 startingRedisSpinner.succeed('Started Redis container')
             }
 
             if (config.shouldHaveRabbitMQ) {
                 const startingRabbitMQSpinner = ora('Starting RabbitMQ container...').start()
-                await this.runContainer('rabbitmq')
+                await upContainer(Constants.RABBITMQ_CONTAINER.name)
                 startingRabbitMQSpinner.succeed('Started RabbitMQ container')
             }
 
             if (config.shouldHaveApi) {
                 const startingApiSpinner = ora('Starting API container...').start()
-                await this.runContainer('api')
+                await upContainer(Constants.API_CONTAINER.name)
                 startingApiSpinner.succeed('Started API container')
             }
 
             const startingNetworkSpinner = ora('Starting network...').start()
-            await this.runContainer('testnet', {
+            await upContainer(Constants.TESTNET_CONTAINER.name, {
                 ...process.env,
                 "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),
                 "MX_LT_ELASTIC_ENABLED": config.shouldHaveElasticSearch.toString(),
                 "MX_LT_CUSTOM_EGLD_ADDRESS": config.initialEGLDAddress ?? ""
             })
             startingNetworkSpinner.succeed('Started network successfully')
+
+            await saveLatestConfig(config)
 
             const networkReadySpinner = ora('Waiting for network to be ready... (this may take up to 30 minutes)').start()
             await waitForVMQueryToBeReady()
@@ -101,10 +106,5 @@ export class RunnerQuestion extends CLIQuestion {
 
             throw e
         }
-    }
-
-    private async runContainer(containerName: string, env?: NodeJS.ProcessEnv) {
-        await execCustomInRepo(`docker-compose build --no-cache ${containerName}`, false, {env: env})
-        await execCustomInRepo(`docker-compose up -d ${containerName}`, false, {env: env})
     }
 }
