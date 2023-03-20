@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64 ghcr.io/gfusee/mx-testnet-docker:main
+FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:6607468a139a9c8dd8c1cd498ae1d852ab7237c8c82728d1e9633dc85385555a
 
 RUN sudo apt install lsof -y
 
