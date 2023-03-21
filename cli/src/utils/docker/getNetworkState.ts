@@ -40,7 +40,6 @@ async function getTestnetContainerState(): Promise<ContainerState> {
         const containerId = stdout.trim()
 
         if (!containerId) {
-            console.log('Container not found')
             return ContainerState.NonExistent
         }
 

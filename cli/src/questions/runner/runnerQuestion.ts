@@ -80,9 +80,7 @@ export class RunnerQuestion extends CLIQuestion {
 
             await saveLatestConfig(config)
 
-            const networkReadySpinner = ora('Waiting for network to be ready... (this may take up to 30 minutes)').start()
             await waitForVMQueryToBeReady()
-            networkReadySpinner.succeed('Network is ready')
 
             if (config.shouldHaveApi) {
                 const startingApiHealthCheckSpinner = ora('Waiting for API to be ready').start()

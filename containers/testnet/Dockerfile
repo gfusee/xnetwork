@@ -9,9 +9,11 @@ COPY change_prefs.py change_prefs.py
 
 COPY replace_testnet_toml.py replace_testnet_toml.py
 
+COPY change_proxy_config.py change_proxy_config.py
 COPY genesis.json genesis.json
 COPY create_wallet.py create_wallet.py
 COPY change_genesis.py change_genesis.py
+COPY change_enable_epochs.py change_enable_epochs.py
 COPY economics.toml economics.toml
 COPY replace_economics.py replace_economics.py
 COPY add_result.py add_result.py

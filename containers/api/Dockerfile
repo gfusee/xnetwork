@@ -33,8 +33,6 @@ RUN sudo pip3 install requests
 COPY wait-for-it.sh .
 RUN sudo chmod +x wait-for-it.sh
 
-COPY wait-for-vm-query-ready.py .
-
 COPY run.sh .
 RUN sudo chmod +x run.sh
 CMD ./run.sh

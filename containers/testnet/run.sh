@@ -9,15 +9,20 @@ setup() {
   mxpy testnet config
 
   echo "Copying files..."
+  cp change_proxy_config.py testnet/change_proxy_config.py
   cp read_result.py testnet/read_result.py
   cp change_prefs.py testnet/change_prefs.py
   cp change_genesis.py testnet/change_genesis.py
+  cp change_enable_epochs.py testnet/change_enable_epochs.py
   cp create_wallet.py testnet/create_wallet.py
   cp economics.toml testnet/economics.toml
   cp genesis.json testnet/genesis.json
   cp replace_economics.py testnet/replace_economics.py
   cp systemSmartContractsConfig.toml testnet/systemSmartContractsConfig.toml
   cp replace_system_contracts_config.py testnet/replace_system_contracts_config.py
+
+  echo "Changing proxy config..."
+  cd testnet && sudo python3 change_proxy_config.py && cd ..
 
   echo "Changing nodes system contracts config..."
   cd testnet && sudo python3 replace_system_contracts_config.py && cd ..
@@ -27,6 +32,9 @@ setup() {
 
   echo "Changing nodes genesis..."
   cd testnet && sudo python3 change_genesis.py "$MX_LT_CUSTOM_EGLD_ADDRESS" "$MX_LT_NUM_SHARDS" && cd ..
+
+  echo "Changing nodes enable epochs..."
+  cd testnet && sudo python3 change_enable_epochs.py "$MX_LT_ENABLE_EPOCHS" && cd ..
 
   echo "Changing nodes economics..."
   cd testnet && sudo python3 replace_economics.py "$MX_RESULT_TOTAL_SUPPLY" && cd ..
