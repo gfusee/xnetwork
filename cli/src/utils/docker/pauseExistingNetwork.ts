@@ -27,7 +27,7 @@ export async function pauseExistingNetwork() {
     }
 
     const pausingTestnetSpinner = ora(`Pausing testnet...`).start()
-    await execCustomInRepo(`docker-compose exec testnet bash /home/ubuntu/pause.sh`, false)
+    await pauseContainer(Constants.TESTNET_CONTAINER)
     pausingTestnetSpinner.succeed(`Paused testnet successfully`)
 }
 
