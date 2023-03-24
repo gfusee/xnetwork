@@ -1,4 +1,4 @@
-FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:6607468a139a9c8dd8c1cd498ae1d852ab7237c8c82728d1e9633dc85385555a
+FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:710e39d017fe6be27b3c9a1b61a06e9b168e157a263f19ea89e02b8c0924a2d3
 
 STOPSIGNAL SIGTERM
 
