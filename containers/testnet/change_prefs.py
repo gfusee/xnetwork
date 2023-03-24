@@ -7,7 +7,8 @@ should_use_elastic = sys.argv[1] == 'true'
 prefs_to_add = f"""
 OverridableConfigTomlValues = [
    {{ File = "external.toml", Path = "ElasticSearchConnector.Enabled", Value = "{should_use_elastic}" }},
-   {{ File = "external.toml", Path = "ElasticSearchConnector.URL", Value = "http://elastic:9200" }}
+   {{ File = "external.toml", Path = "ElasticSearchConnector.URL", Value = "http://elastic:9200" }},
+   {{ File = "config.toml", Path = "GeneralSettings.StartInEpochEnabled", Value = "false" }}
 ]
 """
 

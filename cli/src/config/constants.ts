@@ -9,6 +9,16 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+export enum PauseBehavior {
+    PAUSE,
+    STOP
+}
+
+export type ContainerInfos = {
+    name: string
+    pauseBehavior: PauseBehavior
+}
+
 export class Constants {
     static CLI_USER_PATH = path.join(os.homedir(), '.xnetwork')
     static get REPO_URL(): string {
@@ -21,6 +31,56 @@ export class Constants {
 
     static get CLI_USER_REPO_PATH(): string {
         return path.join(Constants.CLI_USER_PATH, '.repo')
+    }
+
+    static get CLI_USER_STORAGE_PATH(): string {
+        return path.join(Constants.CLI_USER_PATH, 'storage')
+    }
+
+    static get CLI_USER_STORAGE_LATEST_CONFIG(): string {
+        return path.join(Constants.CLI_USER_STORAGE_PATH, 'latest_config.json')
+    }
+
+    static get TESTNET_CONTAINER(): ContainerInfos {
+        return {
+            name: "testnet",
+            pauseBehavior: PauseBehavior.PAUSE
+        }
+    }
+
+    static get API_CONTAINER(): ContainerInfos {
+        return {
+            name: "api",
+            pauseBehavior: PauseBehavior.STOP
+        }
+    }
+
+    static get ELASTIC_CONTAINER(): ContainerInfos {
+        return {
+            name: "elastic",
+            pauseBehavior: PauseBehavior.PAUSE
+        }
+    }
+
+    static get MYSQL_CONTAINER(): ContainerInfos {
+        return {
+            name: "mysql",
+            pauseBehavior: PauseBehavior.STOP
+        }
+    }
+
+    static get REDIS_CONTAINER(): ContainerInfos {
+        return {
+            name: "redis",
+            pauseBehavior: PauseBehavior.STOP
+        }
+    }
+
+    static get RABBITMQ_CONTAINER(): ContainerInfos {
+        return {
+            name: "rabbitmq",
+            pauseBehavior: PauseBehavior.STOP
+        }
     }
 
     static isNoCacheRequested(): boolean {
