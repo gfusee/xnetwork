@@ -15,29 +15,29 @@ export class ResultLogger {
             return
         }
 
-        let resultString = `${chalk.bold.green("Local testnet successfully started !")}`
+        let firstPartResultString = `${chalk.bold.green("Local testnet successfully started !")}`
 
-        resultString += `
+        firstPartResultString += `
         
         Proxy/Gateway URL: ${chalk.blue("http://localhost:7950")}
         ChainID: ${chalk.blue("local-testnet")}
         `
 
         if (config.shouldHaveElasticSearch) {
-            resultString += `
+            firstPartResultString += `
             ElasticSearch URL: ${chalk.blue("http://localhost:9200")}
             `
         }
 
         if (config.shouldHaveApi) {
-            resultString += `
+            firstPartResultString += `
             API URL: ${chalk.blue("http://localhost:3001")}
             `
         }
 
         if (containerResults.genesisEgldPemPath) {
             const addressPrivateKey = (await execCustomInRepo(`docker-compose exec testnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
-            resultString += `
+            firstPartResultString += `
             An address with 1,000,000 EGLD was generated for you. Here are the details:
             
             ${chalk.bold.red("Here is the private key. Keep it safe and don't use it in another place than the local testnet!")}
@@ -47,12 +47,41 @@ export class ResultLogger {
             ${chalk.bold.red("End of the private key. You can copy/paste the content into a .pem file and use it to do transactions on the local testnet.")}
             `
         } else {
-            resultString += `
+            firstPartResultString += `
             You choose to give 1,000,000 EGLD to a custom address instead of generating a new one. As a reminder, here is the address you specified: ${chalk.blue(containerResults.genesisEgldAddress)}
             `
         }
 
-        console.log(dontIndent(resultString))
+        let mxOpsDisplayString = ''
+
+        if (config.mxOpsScenesPath) {
+            const mxopsXNetworkValuesRaw = (await execCustomInRepo(`docker-compose exec testnet python3 -m mxops data get -n LOCAL -s xnetwork`)).stdout.toString()
+            const searchString = 'ABSOLUTELY NO WARRANTY\n'
+            const mxopsXNetworkValues = mxopsXNetworkValuesRaw.substring(mxopsXNetworkValuesRaw.lastIndexOf(searchString) + searchString.length).trim()
+            const mxopsXNetworkValuesObject = JSON.parse(mxopsXNetworkValues)
+
+            mxOpsDisplayString = dontIndent(
+                `
+            ------------------------------
+            ${chalk.bold.red("You specified a path to mxops scenes. They have been processed under a scenario called 'xnetwork'. Here are result values of this scenario:")}
+            `
+            )
+
+            mxOpsDisplayString += '\n'
+            mxOpsDisplayString += JSON.stringify(mxopsXNetworkValuesObject, null, 4).trim()
+
+            mxOpsDisplayString += dontIndent(
+                `
+            ------------------------------
+            `
+            )
+        }
+
+        console.log(dontIndent(firstPartResultString))
+
+        if (mxOpsDisplayString.length > 0) {
+            console.log(mxOpsDisplayString)
+        }
 
     }
 
