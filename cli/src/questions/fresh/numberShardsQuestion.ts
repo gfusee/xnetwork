@@ -14,7 +14,7 @@ export class NumberShardsQuestion extends CLIQuestion {
         }
     }
 
-    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
         const maxShards = 3
 
         if (answers.numberShards < 1) {

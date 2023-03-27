@@ -1,10 +1,12 @@
 import {CLIChoice, CLIQuestion} from "../question.js";
 import {Answers, CheckboxQuestion, Question} from "inquirer";
 import {CLIConfig} from "../../config/config";
+import {MxOpsScenesPathQuestion} from "./mxOpsScenesPathQuestion.js";
 
 export abstract class FeaturesQuestion extends CLIQuestion {
 
     private static apiChoice = 'Enable full API (like api.multiversx.com)'
+    private static mxOpsChoice = 'Run MxOps scenes at startup'
 
     override async getQuestion(): Promise<Question> {
         const question: CheckboxQuestion = {
@@ -17,11 +19,14 @@ export abstract class FeaturesQuestion extends CLIQuestion {
         return question
     }
 
-    private generalFeatures: CLIChoice[] = [FeaturesQuestion.apiChoice]
+    private generalFeatures: CLIChoice[] = [
+        FeaturesQuestion.apiChoice,
+        FeaturesQuestion.mxOpsChoice
+    ]
 
     abstract cliChoices: CLIChoice[]
 
-    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
         if (answers.choice.includes(FeaturesQuestion.apiChoice)) {
             config.shouldHaveElasticSearch = true
             config.shouldHaveMySQL = true
@@ -30,6 +35,12 @@ export abstract class FeaturesQuestion extends CLIQuestion {
             config.shouldHaveApi = true
         }
 
-        return undefined
+        const questions: CLIQuestion[] = []
+
+        if (answers.choice.includes(FeaturesQuestion.mxOpsChoice)) {
+            questions.push(new MxOpsScenesPathQuestion())
+        }
+
+        return questions
     }
 }

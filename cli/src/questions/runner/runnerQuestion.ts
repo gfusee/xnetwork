@@ -1,7 +1,7 @@
 import {CLIQuestion} from "../question.js"
 import {Answers, ListQuestion, Question} from "inquirer"
 import {CLIConfig} from "../../config/config.js"
-import {ExecError} from "../../utils/exec.js"
+import {execCustomInRepo, ExecError} from "../../utils/exec.js"
 import ora from "ora"
 import {waitForVMQueryToBeReady} from "../../utils/healthchecks/waitForVMQueryToBeReady.js";
 import {waitForAPIToBeReady} from "../../utils/healthchecks/waitForAPIToBeReady.js";
@@ -27,12 +27,12 @@ export class RunnerQuestion extends CLIQuestion {
         return listQuestion
     }
 
-    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
         if (answers.choice === RunnerQuestion.yesChoice) {
             await this.run(config)
         }
 
-        return undefined
+        return []
     }
 
     private async run(config: CLIConfig) {
@@ -63,12 +63,6 @@ export class RunnerQuestion extends CLIQuestion {
                 startingRabbitMQSpinner.succeed('Started RabbitMQ container')
             }
 
-            if (config.shouldHaveApi) {
-                const startingApiSpinner = ora('Starting API container...').start()
-                await upContainer(Constants.API_CONTAINER.name)
-                startingApiSpinner.succeed('Started API container')
-            }
-
             const startingNetworkSpinner = ora('Starting network...').start()
             await upContainer(Constants.TESTNET_CONTAINER.name, {
                 ...process.env,
@@ -83,9 +77,23 @@ export class RunnerQuestion extends CLIQuestion {
             await waitForVMQueryToBeReady()
 
             if (config.shouldHaveApi) {
+                const startingApiSpinner = ora('Starting API container...').start()
+                await upContainer(Constants.API_CONTAINER.name)
+                startingApiSpinner.succeed('Started API container')
+
                 const startingApiHealthCheckSpinner = ora('Waiting for API to be ready').start()
                 await waitForAPIToBeReady()
                 startingApiHealthCheckSpinner.succeed('API is ready')
+            }
+
+            if (config.mxOpsScenesPath) {
+                const copyingScenesSpinner = ora('Copying mxops scenes...').start()
+                await execCustomInRepo(`docker-compose cp ${config.mxOpsScenesPath} testnet:/home/ubuntu/mxops`)
+                copyingScenesSpinner.succeed('Copied mxops scenes')
+
+                const runningScenesSpinner = ora('Running mxops scenes...').start()
+                await execCustomInRepo(`docker-compose exec testnet python3 run_mxops.py`)
+                runningScenesSpinner.succeed('Ran mxops scenes')
             }
 
             const resultLogger = new ResultLogger()
