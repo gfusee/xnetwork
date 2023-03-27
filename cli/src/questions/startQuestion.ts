@@ -50,7 +50,7 @@ export class StartQuestion extends CLIQuestion {
         return question
     }
 
-    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
         switch (answers.choice) {
             case StartQuestion.removeNetworkChoice:
                 await removeExistingNetwork()
@@ -64,6 +64,8 @@ export class StartQuestion extends CLIQuestion {
             case StartQuestion.createNetworkChoice:
                 return [new NumberShardsQuestion(), new RunnerQuestion()]
         }
+
+        throw 'Unknown choice'
     }
 
     override async process(config: CLIConfig) {

@@ -6,6 +6,7 @@ export type CLIConfig = {
     shouldHaveApi: boolean
     numberOfShards: number
     initialEGLDAddress?: string
+    mxOpsScenesPath?: string
 }
 
 export function getDefaultConfig(): CLIConfig {

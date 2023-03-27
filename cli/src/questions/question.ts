@@ -12,16 +12,14 @@ export abstract class CLIQuestion {
 
         const nextQuestions: CLIQuestion[] = []
         const actionResults = await this.handleAnswer(response, config)
-        if (actionResults) {
-            nextQuestions.push(...actionResults)
-        }
+        nextQuestions.push(...actionResults)
 
         for (const nextQuestion of nextQuestions) {
             await nextQuestion.process(config)
         }
     }
 
-    async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
-        return undefined
+    async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
+        return []
     }
 }

@@ -2,6 +2,8 @@ FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:710e39d017fe6
 
 STOPSIGNAL SIGTERM
 
+RUN pip3 install mxops==1.0.0
+
 RUN sudo apt install lsof -y
 
 COPY wait-for-it.sh .
@@ -21,6 +23,8 @@ COPY systemSmartContractsConfig.toml systemSmartContractsConfig.toml
 COPY replace_system_contracts_config.py replace_system_contracts_config.py
 COPY pause.sh pause.sh
 COPY handle_signal.sh handle_signal.sh
+COPY mxops-init mxops-init
+COPY run_mxops.py run_mxops.py
 
 RUN sudo chmod +x pause.sh
 RUN sudo chmod +x handle_signal.sh

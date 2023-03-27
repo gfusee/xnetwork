@@ -17,7 +17,7 @@ export class ShadowForkNetworkQuestion extends CLIQuestion {
         return listQuestion
     }
 
-    override async handleAnswer(answers: Answers): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers): Promise<CLIQuestion[]> {
         return [new ShadowForkFeaturesQuestion()]
     }
 }

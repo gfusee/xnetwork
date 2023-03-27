@@ -13,7 +13,7 @@ export class CustomAddressToGiveEGLDQuestion extends CLIQuestion {
         }
     }
 
-    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[] | undefined> {
+    override async handleAnswer(answers: Answers, config: CLIConfig): Promise<CLIQuestion[]> {
         const answer = answers.address
 
         try {
@@ -27,6 +27,6 @@ export class CustomAddressToGiveEGLDQuestion extends CLIQuestion {
 
         config.initialEGLDAddress = answer
 
-        return undefined
+        return []
     }
 }
