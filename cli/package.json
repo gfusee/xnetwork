@@ -1,6 +1,6 @@
 {
   "name": "@gfusee/xnetwork",
-  "version": "0.0.2",
+  "version": "0.1.1",
   "description": "An all-in-one tool for creating and managing your own MultiversX network",
   "type": "module",
   "scripts": {
