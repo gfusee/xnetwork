@@ -1,38 +1,58 @@
 #!/usr/bin/env node
 
-import {getDefaultConfig} from "./config/config.js"
-import {DockerPrerequisites} from "./prerequisites/dockerPrerequisites.js"
+import {CLIConfig, getDefaultConfig} from "./config/config.js"
 import {dontIndent} from "./utils/strings/dontIndent.js";
 import chalk from "chalk";
-import {GitRepoPrerequisites} from "./prerequisites/gitRepoPrerequisites.js"
 import { program } from 'commander'
 import {StartQuestion} from "./questions/startQuestion.js";
+import fs from "fs/promises";
+import {checkPrerequisites} from "./utils/host/checkPrerequisites.js";
+import {createNetwork} from "./utils/docker/createNetwork.js";
+import {removeExistingNetwork} from "./utils/docker/removeExistingNetwork.js";
+import {readLatestConfig} from "./utils/config/readLatestConfig.js";
 
 async function main() {
 
-    program
+    const defaultCommand = program
         .name('xnetwork')
         .version('0.0.1')
         .description('An all-in-one tool for creating and managing your own MultiversX network')
         .option('--no-cache', 'Do not use cache when downloading files')
         .option('--custom-repo-path <path>', 'Fetch files from a custom repository')
         .option('--custom-repo-branch <branch>', 'Fetch files from a custom repository branch')
+        .action(startInteractiveSetup)
+
+    defaultCommand
+        .command('create')
+        .description('Create a new network, non-interactive')
+        .argument('<config-path>', 'Path to the config file')
+        .action((configPath) => {createNetworkAction(configPath)})
+
+    defaultCommand
+        .command('remove')
+        .description('Remove a network, non-interactive')
+        .action(removeNetworkAction)
+
+    const configCommand = defaultCommand
+        .command('config')
+        .description('Config utils')
+
+    configCommand
+        .command('generate')
+        .description('Generate a config file')
+        .argument('<output-path>', 'Path to the output file')
+        .action((outputPath) => {generateConfigAction(outputPath)})
+
+    configCommand
+        .command('latest')
+        .description('Get the latest config file used to create a network, if exists')
+        .action(getLatestConfigAction)
 
     await program.parse(process.argv)
+}
 
-    console.log('Checking prerequisites...')
-
-    try {
-        await (new DockerPrerequisites()).check()
-        await (new GitRepoPrerequisites()).check()
-    } catch (e) {
-        if (typeof e === 'string') {
-            console.log(e)
-            process.exit(1)
-        } else {
-            throw e
-        }
-    }
+async function startInteractiveSetup() {
+    await checkPrerequisites()
 
     const welcomeMessage = `
     Welcome to ${chalk.bold('xNetwork')} CLI! 🔥
@@ -47,4 +67,35 @@ async function main() {
     await (new StartQuestion()).process(config)
 }
 
-main().then(() => console.log('\nDone'))
+async function createNetworkAction(configPath: string) {
+    await checkPrerequisites()
+
+    const configRaw = await fs.readFile(configPath, 'utf-8')
+    const config = JSON.parse(configRaw) as CLIConfig
+
+    await createNetwork(config)
+}
+
+async function removeNetworkAction() {
+    await checkPrerequisites()
+
+    await removeExistingNetwork()
+}
+
+async function generateConfigAction(outputPath: string) {
+    const config = getDefaultConfig()
+    const configString = JSON.stringify(config, null, 4)
+
+    await fs.writeFile(outputPath, configString)
+}
+
+async function getLatestConfigAction() {
+    try {
+        const latestConfig = await readLatestConfig()
+        console.log(JSON.stringify(latestConfig, null, 4))
+    } catch (e) {
+        console.log('No latest config found')
+    }
+}
+
+main().then(() => console.log('Done'))
