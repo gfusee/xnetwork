@@ -51,7 +51,7 @@ async function main() {
     await program.parse(process.argv)
 }
 
-async function startInteractiveSetup() {
+export async function startInteractiveSetup() {
     await checkPrerequisites()
 
     const welcomeMessage = `
@@ -67,7 +67,7 @@ async function startInteractiveSetup() {
     await (new StartQuestion()).process(config)
 }
 
-async function createNetworkAction(configPath: string) {
+export async function createNetworkAction(configPath: string) {
     await checkPrerequisites()
 
     const configRaw = await fs.readFile(configPath, 'utf-8')
@@ -76,20 +76,20 @@ async function createNetworkAction(configPath: string) {
     await createNetwork(config)
 }
 
-async function removeNetworkAction() {
+export async function removeNetworkAction() {
     await checkPrerequisites()
 
     await removeExistingNetwork()
 }
 
-async function generateConfigAction(outputPath: string) {
+export async function generateConfigAction(outputPath: string) {
     const config = getDefaultConfig()
     const configString = JSON.stringify(config, null, 4)
 
     await fs.writeFile(outputPath, configString)
 }
 
-async function getLatestConfigAction() {
+export async function getLatestConfigAction() {
     try {
         const latestConfig = await readLatestConfig()
         console.log(JSON.stringify(latestConfig, null, 4))
