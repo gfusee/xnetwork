@@ -1,7 +1,7 @@
 import * as fs from "fs/promises"
 import { existsSync } from "fs"
-import {CLIConfig} from "../../config/config.js"
-import {Constants} from "../../config/constants.js"
+import {CLIConfig} from "../../config/config"
+import {Constants} from "../../config/constants"
 import ora from "ora";
 
 // Write the latest config to the file system, creating it if it doesn't exist

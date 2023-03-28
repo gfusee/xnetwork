@@ -1,6 +1,6 @@
 import {Answers, ListQuestion, Question} from "inquirer"
-import {CLIQuestion} from "../question.js"
-import {ShadowForkFeaturesQuestion} from "../features/shadowForkFeaturesQuestion.js";
+import {CLIQuestion} from "../question"
+import {ShadowForkFeaturesQuestion} from "../features/shadowForkFeaturesQuestion";
 
 export class ShadowForkNetworkQuestion extends CLIQuestion {
     static readonly mainnetChoice = 'Mainnet'

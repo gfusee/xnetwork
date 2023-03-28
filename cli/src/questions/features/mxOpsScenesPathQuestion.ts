@@ -1,6 +1,6 @@
-import {CLIQuestion} from "../question.js";
+import {CLIQuestion} from "../question";
 import {Answers, Question} from "inquirer";
-import {CLIConfig} from "../../config/config.js";
+import {CLIConfig} from "../../config/config";
 import fs from "fs";
 
 export class MxOpsScenesPathQuestion extends CLIQuestion {

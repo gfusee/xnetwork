@@ -1,7 +1,7 @@
-import {execCustomInRepo} from "../exec.js";
+import {execCustomInRepo} from "../exec";
 import ora from "ora";
-import {readLatestConfig} from "../config/readLatestConfig.js"
-import {Constants, ContainerInfos, PauseBehavior} from "../../config/constants.js"
+import {readLatestConfig} from "../config/readLatestConfig"
+import {Constants, ContainerInfos, PauseBehavior} from "../../config/constants"
 
 export async function pauseExistingNetwork() {
     const latestConfig = await readLatestConfig()

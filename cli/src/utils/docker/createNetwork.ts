@@ -1,13 +1,13 @@
-import {CLIConfig} from "../../config/config.js";
-import {removeExistingNetwork} from "./removeExistingNetwork.js";
+import {CLIConfig} from "../../config/config";
+import {removeExistingNetwork} from "./removeExistingNetwork";
 import ora from "ora";
-import {upContainer} from "./upContainer.js";
-import {Constants} from "../../config/constants.js";
-import {saveLatestConfig} from "../config/saveLatestConfig.js";
-import {waitForVMQueryToBeReady} from "../healthchecks/waitForVMQueryToBeReady.js";
-import {waitForAPIToBeReady} from "../healthchecks/waitForAPIToBeReady.js";
-import {execCustomInRepo, ExecError} from "../exec.js";
-import {ResultLogger} from "../../result/resultLogger.js";
+import {upContainer} from "./upContainer";
+import {Constants} from "../../config/constants";
+import {saveLatestConfig} from "../config/saveLatestConfig";
+import {waitForVMQueryToBeReady} from "../healthchecks/waitForVMQueryToBeReady";
+import {waitForAPIToBeReady} from "../healthchecks/waitForAPIToBeReady";
+import {execCustomInRepo, ExecError} from "../exec";
+import {ResultLogger} from "../../result/resultLogger";
 
 export async function createNetwork(config: CLIConfig) {
     try {

@@ -1,4 +1,4 @@
-import {execCustomInRepo} from "../exec.js";
+import {execCustomInRepo} from "../exec";
 
 export async function upContainer(containerName: string, env?: NodeJS.ProcessEnv, shouldBuild: boolean = true) {
     if (shouldBuild) {

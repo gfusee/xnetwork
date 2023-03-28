@@ -1,7 +1,7 @@
-import {CLIQuestion} from "../question.js";
+import {CLIQuestion} from "../question";
 import {Answers, Question} from "inquirer";
-import {CLIConfig} from "../../config/config.js";
-import {Address} from "@multiversx/sdk-core/out/index.js";
+import {CLIConfig} from "../../config/config";
+import {Address} from "@multiversx/sdk-core/out/index";
 
 export class CustomAddressToGiveEGLDQuestion extends CLIQuestion {
 

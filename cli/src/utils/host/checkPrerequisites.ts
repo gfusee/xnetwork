@@ -1,5 +1,5 @@
-import {DockerPrerequisites} from "../../prerequisites/dockerPrerequisites.js";
-import {GitRepoPrerequisites} from "../../prerequisites/gitRepoPrerequisites.js";
+import {DockerPrerequisites} from "../../prerequisites/dockerPrerequisites";
+import {GitRepoPrerequisites} from "../../prerequisites/gitRepoPrerequisites";
 
 export async function checkPrerequisites() {
     console.log('Checking prerequisites...')

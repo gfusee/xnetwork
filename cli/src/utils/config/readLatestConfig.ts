@@ -1,5 +1,5 @@
 import * as fs from "fs/promises"
-import {Constants} from "../../config/constants.js"
+import {Constants} from "../../config/constants"
 import {CLIConfig} from "../../config/config";
 
 export async function readLatestConfig(): Promise<CLIConfig> {

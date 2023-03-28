@@ -1,7 +1,7 @@
 import {ExecException, ExecOptions} from "child_process"
 import { exec } from "child_process"
 import { createInterface } from 'readline'
-import {Constants} from "../config/constants.js";
+import {Constants} from "../config/constants";
 
 export type ExecError = {
     error: ExecException,

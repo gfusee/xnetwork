@@ -1,9 +1,9 @@
-import {execCustomInRepo} from "../exec.js";
+import {execCustomInRepo} from "../exec";
 import ora from "ora";
-import {readLatestConfig} from "../config/readLatestConfig.js";
-import {upContainer} from "./upContainer.js";
-import {Constants, ContainerInfos, PauseBehavior} from "../../config/constants.js";
-import {waitForVMQueryToBeReady} from "../healthchecks/waitForVMQueryToBeReady.js";
+import {readLatestConfig} from "../config/readLatestConfig";
+import {upContainer} from "./upContainer";
+import {Constants, ContainerInfos, PauseBehavior} from "../../config/constants";
+import {waitForVMQueryToBeReady} from "../healthchecks/waitForVMQueryToBeReady";
 
 export async function resumeExistingNetwork() {
     const latestConfig = await readLatestConfig()

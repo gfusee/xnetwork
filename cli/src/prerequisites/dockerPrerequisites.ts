@@ -1,5 +1,5 @@
-import {Prerequisites} from "./prerequisites.js"
-import {execCustom} from "../utils/exec.js"
+import {Prerequisites} from "./prerequisites"
+import {execCustom} from "../utils/exec"
 import ora from "ora"
 import chalk from 'chalk'
 

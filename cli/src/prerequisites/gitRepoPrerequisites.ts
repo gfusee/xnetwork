@@ -1,7 +1,7 @@
 import {Prerequisites} from "./prerequisites"
-import {Constants} from "../config/constants.js"
+import {Constants} from "../config/constants"
 import fs from 'fs/promises'
-import {execCustom, execCustomInRepo} from "../utils/exec.js"
+import {execCustom, execCustomInRepo} from "../utils/exec"
 import ora from "ora"
 
 export class GitRepoPrerequisites implements Prerequisites {

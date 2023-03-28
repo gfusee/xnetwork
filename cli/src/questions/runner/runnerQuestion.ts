@@ -1,7 +1,7 @@
-import {CLIQuestion} from "../question.js"
+import {CLIQuestion} from "../question"
 import {Answers, ListQuestion, Question} from "inquirer"
-import {CLIConfig} from "../../config/config.js"
-import {createNetwork} from "../../utils/docker/createNetwork.js";
+import {CLIConfig} from "../../config/config"
+import {createNetwork} from "../../utils/docker/createNetwork";
 
 export class RunnerQuestion extends CLIQuestion {
 

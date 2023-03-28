@@ -1,4 +1,4 @@
-import {execCustomInRepo} from "../exec.js";
+import {execCustomInRepo} from "../exec";
 
 type TestnetResult = {
     genesisEgldAddress: string,

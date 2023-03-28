@@ -1,8 +1,8 @@
-import {FeaturesQuestion} from "./featuresQuestion.js";
-import {CLIQuestion} from "../question.js";
+import {FeaturesQuestion} from "./featuresQuestion";
+import {CLIQuestion} from "../question";
 import {Answers} from "inquirer";
-import {CLIConfig} from "../../config/config.js";
-import {CustomAddressToGiveEGLDQuestion} from "./customAddressToGiveEGLDQuestion.js";
+import {CLIConfig} from "../../config/config";
+import {CustomAddressToGiveEGLDQuestion} from "./customAddressToGiveEGLDQuestion";
 
 export class FreshTestnetFeaturesQuestion extends FeaturesQuestion {
 

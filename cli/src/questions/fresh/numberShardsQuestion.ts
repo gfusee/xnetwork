@@ -1,7 +1,7 @@
-import {CLIQuestion} from "../question.js";
-import {FreshTestnetFeaturesQuestion} from "../features/freshTestnetFeaturesQuestion.js";
+import {CLIQuestion} from "../question";
+import {FreshTestnetFeaturesQuestion} from "../features/freshTestnetFeaturesQuestion";
 import {Answers, Question} from "inquirer";
-import {CLIConfig} from "../../config/config.js";
+import {CLIConfig} from "../../config/config";
 
 export class NumberShardsQuestion extends CLIQuestion {
 

@@ -1,7 +1,7 @@
-import {CLIChoice, CLIQuestion} from "../question.js";
+import {CLIChoice, CLIQuestion} from "../question";
 import {Answers, CheckboxQuestion, Question} from "inquirer";
 import {CLIConfig} from "../../config/config";
-import {MxOpsScenesPathQuestion} from "./mxOpsScenesPathQuestion.js";
+import {MxOpsScenesPathQuestion} from "./mxOpsScenesPathQuestion";
 
 export abstract class FeaturesQuestion extends CLIQuestion {
 

@@ -1,8 +1,8 @@
-import {CLIConfig} from "../config/config.js";
+import {CLIConfig} from "../config/config";
 import chalk from "chalk";
-import {execCustomInRepo} from "../utils/exec.js";
-import {dontIndent} from "../utils/strings/dontIndent.js";
-import {getNetworkState} from "../utils/docker/getNetworkState.js";
+import {execCustomInRepo} from "../utils/exec";
+import {dontIndent} from "../utils/strings/dontIndent";
+import {getNetworkState} from "../utils/docker/getNetworkState";
 
 export class ResultLogger {
     async printResults(config: CLIConfig) {

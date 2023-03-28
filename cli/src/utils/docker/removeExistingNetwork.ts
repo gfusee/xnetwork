@@ -1,4 +1,4 @@
-import {execCustomInRepo} from "../exec.js";
+import {execCustomInRepo} from "../exec";
 import ora from "ora";
 
 export async function removeExistingNetwork() {

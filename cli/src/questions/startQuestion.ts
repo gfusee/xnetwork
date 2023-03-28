@@ -1,12 +1,12 @@
-import {CLIChoice, CLIQuestion} from "./question.js"
+import {CLIChoice, CLIQuestion} from "./question"
 import inquirer, {Answers, ListQuestion, Question} from "inquirer";
-import {CLIConfig} from "../config/config.js";
-import {NumberShardsQuestion} from "./fresh/numberShardsQuestion.js";
-import {RunnerQuestion} from "./runner/runnerQuestion.js";
-import {removeExistingNetwork} from "../utils/docker/removeExistingNetwork.js";
-import {ContainerState, getNetworkState} from "../utils/docker/getNetworkState.js";
-import {pauseExistingNetwork} from "../utils/docker/pauseExistingNetwork.js";
-import {resumeExistingNetwork} from "../utils/docker/resumeExistingNetwork.js";
+import {CLIConfig} from "../config/config";
+import {NumberShardsQuestion} from "./fresh/numberShardsQuestion";
+import {RunnerQuestion} from "./runner/runnerQuestion";
+import {removeExistingNetwork} from "../utils/docker/removeExistingNetwork";
+import {ContainerState, getNetworkState} from "../utils/docker/getNetworkState";
+import {pauseExistingNetwork} from "../utils/docker/pauseExistingNetwork";
+import {resumeExistingNetwork} from "../utils/docker/resumeExistingNetwork";
 import chalk from "chalk";
 
 export class StartQuestion extends CLIQuestion {

@@ -1,4 +1,4 @@
-import {FeaturesQuestion} from "./featuresQuestion.js";
+import {FeaturesQuestion} from "./featuresQuestion";
 import {CLIQuestion} from "../question";
 import {Answers} from "inquirer";
 
