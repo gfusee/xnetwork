@@ -1,4 +1,4 @@
-FROM ghcr.io/gfusee/mx-testnet-docker:sha256-df38bc2a5782350ea3fb854dcc483f905a30edcb5b72654a11d01c395d233b57.sig
+FROM ghcr.io/gfusee/mx-testnet-docker:0.0.2
 
 STOPSIGNAL SIGTERM
 
