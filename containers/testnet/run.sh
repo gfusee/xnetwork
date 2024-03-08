@@ -11,7 +11,7 @@ setup() {
   rm results.json
 
   echo "Replacing testnet.toml..."
-  sudo python3 replace_testnet_toml.py "$MX_LT_NUM_SHARDS"
+  sudo python3 replace_localnet_toml.py "$MX_LT_NUM_SHARDS"
 
   echo "Compiling nodes..."
   rm -rf testnet

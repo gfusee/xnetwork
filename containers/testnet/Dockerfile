@@ -1,4 +1,4 @@
-FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:710e39d017fe6be27b3c9a1b61a06e9b168e157a263f19ea89e02b8c0924a2d3
+FROM ghcr.io/gfusee/mx-testnet-docker:sha256-df38bc2a5782350ea3fb854dcc483f905a30edcb5b72654a11d01c395d233b57.sig
 
 STOPSIGNAL SIGTERM
 
@@ -11,7 +11,7 @@ RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
 COPY change_prefs.py change_prefs.py
 
-COPY replace_testnet_toml.py replace_testnet_toml.py
+COPY replace_localnet_toml.py replace_localnet_toml.py
 COPY genesis.json genesis.json
 COPY create_wallet.py create_wallet.py
 COPY change_genesis.py change_genesis.py
