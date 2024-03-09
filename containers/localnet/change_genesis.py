@@ -4,8 +4,6 @@ import subprocess
 import sys
 import json
 
-mxpy_path = "/home/ubuntu/multiversx-sdk/mxpy"
-
 genesis_egld_wallet = 'genesis-egld-wallet'
 
 validator01_object = {
@@ -154,7 +152,7 @@ def replace_in_files():
         print("No genesis address provided, generating a new one...")
         genesis_pem_path = os.path.join(cwd, genesis_egld_wallet, 'wallet.pem')
         subprocess.run(f'python3 create_wallet.py "{genesis_egld_wallet}"', shell=True)
-        genesis_address = subprocess.check_output(f"{mxpy_path} wallet pem-address {genesis_pem_path}", shell=True).decode('utf-8').strip()
+        genesis_address = subprocess.check_output(f"wallet pem-address {genesis_pem_path}", shell=True).decode('utf-8').strip()
         print("Generated genesis address: " + genesis_address)
         subprocess.run(f'{add_result_command} "genesisEgldPemPath" "{genesis_pem_path}"', shell=True)
 
