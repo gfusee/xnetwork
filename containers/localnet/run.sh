@@ -6,9 +6,12 @@ function handle_sigterm {
 }
 
 trap handle_sigterm SIGTERM
+set -e
 
 setup() {
-  rm results.json
+  set -e
+
+  rm -f results.json
 
   echo "Replacing localnet.toml..."
   sudo python3 replace_localnet_toml.py "$MX_LT_NUM_SHARDS"
@@ -18,6 +21,12 @@ setup() {
   mxpy localnet config
 
   echo "Copying files..."
+
+  # Workarounds because mxpy doesn't copy arm libs yet
+  sudo cp /home/ubuntu/mx-chain-vm-go/wasmer2/libvmexeccapi.so /usr/lib/libvmexeccapi.so
+  sudo cp /home/ubuntu/mx-chain-vm-go/wasmer2/libvmexeccapi_arm.so /usr/lib/libvmexeccapi_arm.so
+  sudo cp /home/ubuntu/mx-chain-vm-go/wasmer/libwasmer_linux_arm64_shim.so /usr/lib/libwasmer_linux_arm64_shim.so
+
   cp read_result.py localnet/read_result.py
   cp change_prefs.py localnet/change_prefs.py
   cp change_genesis.py localnet/change_genesis.py

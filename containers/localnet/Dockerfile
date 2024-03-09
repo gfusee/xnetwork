@@ -15,6 +15,7 @@ COPY replace_localnet_toml.py replace_localnet_toml.py
 COPY genesis.json genesis.json
 COPY create_wallet.py create_wallet.py
 COPY change_genesis.py change_genesis.py
+COPY temp_copy_libs.py temp_copy_libs.py
 COPY economics.toml economics.toml
 COPY replace_economics.py replace_economics.py
 COPY add_result.py add_result.py
