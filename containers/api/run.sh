@@ -7,8 +7,8 @@ sudo ./wait-for-it.sh rabbitmq:5672 --timeout=0
 echo "Waiting for Elastic Search..."
 sudo ./wait-for-it.sh elastic:9200 --timeout=0
 
-echo "Waiting for testnet..."
-sudo ./wait-for-it.sh testnet:7950 --timeout=0
+echo "Waiting for localnet..."
+sudo ./wait-for-it.sh localnet:7950 --timeout=0
 
 echo "Running api service..."
 cd mx-api-service

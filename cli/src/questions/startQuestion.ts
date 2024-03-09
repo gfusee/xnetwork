@@ -22,11 +22,11 @@ export class StartQuestion extends CLIQuestion {
 
         const state = await getNetworkState()
 
-        if (state.testnetContainerState !== ContainerState.NonExistent) {
+        if (state.localnetContainerState !== ContainerState.NonExistent) {
 
-            if (state.testnetContainerState === ContainerState.Running) {
+            if (state.localnetContainerState === ContainerState.Running) {
                 cliChoices.push(StartQuestion.pauseNetworkChoice)
-            } else if (state.testnetContainerState === ContainerState.Stopped) {
+            } else if (state.localnetContainerState === ContainerState.Stopped) {
                 cliChoices.push(StartQuestion.resumeNetworkChoice)
             }
 
@@ -34,7 +34,7 @@ export class StartQuestion extends CLIQuestion {
 
             cliChoices.push(new inquirer.Separator())
 
-            const stateChalk = state.testnetContainerState === ContainerState.Running ? chalk.bold.green('running') : chalk.bold.yellow('paused')
+            const stateChalk = state.localnetContainerState === ContainerState.Running ? chalk.bold.green('running') : chalk.bold.yellow('paused')
             cliChoiceMessage = `A network is ${stateChalk}, what do you want to do ?`
         }
 
@@ -69,7 +69,7 @@ export class StartQuestion extends CLIQuestion {
     }
 
     override async process(config: CLIConfig) {
-        if ((await getNetworkState()).testnetContainerState !== ContainerState.NonExistent) {
+        if ((await getNetworkState()).localnetContainerState !== ContainerState.NonExistent) {
             await super.process(config)
         } else {
             await (new NumberShardsQuestion()).process(config)

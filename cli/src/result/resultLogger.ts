@@ -8,19 +8,19 @@ export class ResultLogger {
     async printResults(config: CLIConfig) {
 
         const state = await getNetworkState()
-        const containerResults = state.testnetResult
+        const containerResults = state.localnetResult
 
         if (!containerResults) {
-            console.log(dontIndent(chalk.bold.red("Something went wrong while checking the status of the local testnet.")))
+            console.log(dontIndent(chalk.bold.red("Something went wrong while checking the status of the localnet.")))
             return
         }
 
-        let firstPartResultString = `${chalk.bold.green("Local testnet successfully started !")}`
+        let firstPartResultString = `${chalk.bold.green("Localnet successfully started !")}`
 
         firstPartResultString += `
         
         Proxy/Gateway URL: ${chalk.blue("http://localhost:7950")}
-        ChainID: ${chalk.blue("local-testnet")}
+        ChainID: ${chalk.blue("localnet")}
         `
 
         if (config.shouldHaveElasticSearch) {
@@ -36,15 +36,15 @@ export class ResultLogger {
         }
 
         if (containerResults.genesisEgldPemPath) {
-            const addressPrivateKey = (await execCustomInRepo(`docker-compose exec testnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
+            const addressPrivateKey = (await execCustomInRepo(`docker-compose exec localnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
             firstPartResultString += `
             An address with 1,000,000 EGLD was generated for you. Here are the details:
             
-            ${chalk.bold.red("Here is the private key. Keep it safe and don't use it in another place than the local testnet!")}
+            ${chalk.bold.red("Here is the private key. Keep it safe and don't use it in another place than the localnet!")}
             
             ${addressPrivateKey}
             
-            ${chalk.bold.red("End of the private key. You can copy/paste the content into a .pem file and use it to do transactions on the local testnet.")}
+            ${chalk.bold.red("End of the private key. You can copy/paste the content into a .pem file and use it to do transactions on the localnet.")}
             `
         } else {
             firstPartResultString += `
@@ -55,7 +55,7 @@ export class ResultLogger {
         let mxOpsDisplayString = ''
 
         if (config.mxOpsScenesPath) {
-            const mxopsXNetworkValuesRaw = (await execCustomInRepo(`docker-compose exec testnet python3 -m mxops data get -n LOCAL -s xnetwork`)).stdout.toString()
+            const mxopsXNetworkValuesRaw = (await execCustomInRepo(`docker-compose exec localnet python3 -m mxops data get -n LOCAL -s xnetwork`)).stdout.toString()
             const searchString = 'ABSOLUTELY NO WARRANTY\n'
             const mxopsXNetworkValues = mxopsXNetworkValuesRaw.substring(mxopsXNetworkValuesRaw.lastIndexOf(searchString) + searchString.length).trim()
             const mxopsXNetworkValuesObject = JSON.parse(mxopsXNetworkValues)

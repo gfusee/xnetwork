@@ -1,9 +1,8 @@
 version: "2.4"
 
 services:
-  testnet:
-    build: containers/testnet
-    platform: linux/x86_64
+  localnet:
+    build: containers/localnet
     ports:
       - "7950:7950"
     environment:

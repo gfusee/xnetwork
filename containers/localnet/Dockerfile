@@ -2,7 +2,7 @@ FROM ghcr.io/gfusee/mx-testnet-docker:0.0.2
 
 STOPSIGNAL SIGTERM
 
-RUN pip3 install mxops==1.0.0
+RUN pip3 install mxops==2.1.0
 
 RUN sudo apt install lsof -y
 

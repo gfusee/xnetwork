@@ -21,11 +21,11 @@ local_path = "/home/ubuntu/mx-chain-proxy-go"
 
 
 def replace_toml_file():
-    # Delete testnet.toml if it exists
-    testnet_toml_path = os.path.join(os.getcwd(), 'localnet.toml')
+    # Delete localnet.toml if it exists
+    localnet_toml_path = os.path.join(os.getcwd(), 'localnet.toml')
 
-    # Create testnet.toml
-    with open(testnet_toml_path, 'w') as file:
+    # Create localnet.toml
+    with open(localnet_toml_path, 'w') as file:
         file.write(toml_file_content)
 
 

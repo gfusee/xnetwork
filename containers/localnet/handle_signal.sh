@@ -1,5 +1,5 @@
 function handle_sigterm {
-  echo "Testnet is being stopped..."
+  echo "Localnet is being stopped..."
   ./pause.sh
 }
 

@@ -45,7 +45,7 @@ urls:
   elastic:
     - 'http://elastic:9200'
   gateway:
-    - 'http://testnet:7950'
+    - 'http://localnet:7950'
   redis: 'redis'
   rabbitmq: 'amqp://rabbitmq:5672'
   providers: 'https://devnet-delegation-api.multiversx.com/providers'

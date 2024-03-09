@@ -38,7 +38,7 @@ export async function createNetwork(config: CLIConfig) {
         }
 
         const startingNetworkSpinner = ora('Starting network...').start()
-        await upContainer(Constants.TESTNET_CONTAINER.name, {
+        await upContainer(Constants.LOCALNET_CONTAINER.name, {
             ...process.env,
             "MX_LT_NUM_SHARDS": config.numberOfShards.toString(),
             "MX_LT_ELASTIC_ENABLED": config.shouldHaveElasticSearch.toString(),
@@ -62,11 +62,11 @@ export async function createNetwork(config: CLIConfig) {
 
         if (config.mxOpsScenesPath) {
             const copyingScenesSpinner = ora('Copying mxops scenes...').start()
-            await execCustomInRepo(`docker-compose cp ${config.mxOpsScenesPath} testnet:/home/ubuntu/mxops`)
+            await execCustomInRepo(`docker-compose cp ${config.mxOpsScenesPath} localnet:/home/ubuntu/mxops`)
             copyingScenesSpinner.succeed('Copied mxops scenes')
 
             const runningScenesSpinner = ora('Running mxops scenes...').start()
-            await execCustomInRepo(`docker-compose exec testnet python3 run_mxops.py`)
+            await execCustomInRepo(`docker-compose exec localnet python3 run_mxops.py`)
             runningScenesSpinner.succeed('Ran mxops scenes')
         }
 
