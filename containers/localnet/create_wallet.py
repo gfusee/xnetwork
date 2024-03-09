@@ -5,9 +5,8 @@ wallet_name = sys.argv[1]
 
 wallet_output = f"{wallet_name}/wallet.pem"
 
-
 def create_wallet():
-    raw_mnemonic = subprocess.check_output(f'{mxpy_path} wallet new', shell=True)
+    raw_mnemonic = subprocess.check_output(f'mxpy wallet new', shell=True)
     # Remove "Mnemonic: " from the beginning of the string
     mnemonic = raw_mnemonic[9:].decode('utf-8').strip()
     subprocess.run(f"mkdir -p {wallet_name}", shell=True)
