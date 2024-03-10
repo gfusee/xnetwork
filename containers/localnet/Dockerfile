@@ -15,7 +15,6 @@ COPY replace_localnet_toml.py replace_localnet_toml.py
 COPY genesis.json genesis.json
 COPY create_wallet.py create_wallet.py
 COPY change_genesis.py change_genesis.py
-COPY temp_copy_libs.py temp_copy_libs.py
 COPY economics.toml economics.toml
 COPY replace_economics.py replace_economics.py
 COPY add_result.py add_result.py
@@ -26,6 +25,9 @@ COPY pause.sh pause.sh
 COPY handle_signal.sh handle_signal.sh
 COPY mxops-init mxops-init
 COPY run_mxops.py run_mxops.py
+COPY temp_replace_enable_epochs.py temp_replace_enable_epochs.py
+COPY temp_replace_genesis_smart_contracts.py temp_replace_genesis_smart_contracts.py
+COPY tempGenesisContracts genesisContracts
 
 RUN sudo chmod +x pause.sh
 RUN sudo chmod +x handle_signal.sh

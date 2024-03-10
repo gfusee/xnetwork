@@ -3,7 +3,6 @@ metaChainShardId: 4294967295
 api:
   public: true
   private: false
-  auth: false
 cron:
   transactionProcessor: true
   transactionProcessorMaxLookBehind: 100
@@ -15,21 +14,52 @@ cron:
   fastWarm: true
   queueWorker: true
   elasticUpdater: false
+  statusChecker: false
 flags:
   useRequestCaching: true
   useKeepAliveAgent: true
-  useTracing: true
-  useRequestLogging: true
-  useVmQueryTracing: true
+  useTracing: false
+  useRequestLogging: false
+  useVmQueryTracing: false
   processNfts: false
   indexer-v3: true
+  collectionPropertiesFromGateway: false
 features:
   eventsNotifier:
     enabled: false
     port: 5674
-    url: 'amqp://guest:guest@127.0.0.1:5672'
+    url: 'amqp://guest:guest@127.0.0.1:5673'
     exchange: 'all_events'
     queue: 'api-process-logs-and-events'
+  guestCaching:
+    enabled: false
+    hitsThreshold: 100
+    ttl: 12
+  transactionPool:
+    enabled: true
+  transactionPoolWarmer:
+    enabled: true
+    cronExpression: '*/5 * * * * *'
+    ttlInSeconds: 60
+  updateCollectionExtraDetails:
+    enabled: false
+  marketplace:
+    enabled: false
+    serviceUrl: 'https://devnet-nfts-graph.multiversx.com/graphql'
+  exchange:
+    enabled: false
+    serviceUrl: 'https://devnet-graph.xexchange.com/graphql'
+  dataApi:
+    enabled: false
+    serviceUrl: 'https://devnet-data-api.multiversx.com'
+  auth:
+    enabled: false
+    maxExpirySeconds: 86400
+    acceptedOrigins:
+      - ''
+    admins:
+      - ''
+    jwtSecret: ''
 image:
   width: 600
   height: 600
@@ -40,12 +70,12 @@ aws:
   s3Bucket: 'devnet-media.elrond.com'
   s3Region: ''
 urls:
-  api:
-    - 'http://localhost:3001'
+  self: 'http://localhost:3001'
   elastic:
     - 'http://elastic:9200'
   gateway:
     - 'http://localnet:7950'
+  verifier: 'https://play-api.multiversx.com'
   redis: 'redis'
   rabbitmq: 'amqp://rabbitmq:5672'
   providers: 'https://devnet-delegation-api.multiversx.com/providers'
@@ -90,12 +120,6 @@ inflation:
   - 1130177
   - 924690
   - 719203
-security:
-  admins:
-  jwtSecret:
 nftProcess:
   parallelism: 1
   maxRetries: 3
-transaction-action:
-  mex:
-    microServiceUrl: ''

@@ -37,6 +37,10 @@ setup() {
   cp systemSmartContractsConfig.toml localnet/systemSmartContractsConfig.toml
   cp replace_system_contracts_config.py localnet/replace_system_contracts_config.py
 
+  cp temp_replace_enable_epochs.py localnet/temp_replace_enable_epochs.py # Workaround while mxpy doesn't support v1.7.0 localnet
+  cp temp_replace_genesis_smart_contracts.py localnet/temp_replace_genesis_smart_contracts.py # Workaround while mxpy doesn't support v1.7.0 localnet
+  cp -R genesisContracts localnet/genesisContracts # Workaround while mxpy doesn't support v1.7.0 localnet
+
   echo "Changing nodes system contracts config..."
   cd localnet && sudo python3 replace_system_contracts_config.py && cd ..
 
@@ -48,6 +52,12 @@ setup() {
 
   echo "Changing nodes economics..."
   cd localnet && sudo python3 replace_economics.py "$MX_RESULT_TOTAL_SUPPLY" && cd ..
+
+  echo "Applying workaround for enableEpochs..."
+  cd localnet && sudo python3 temp_replace_enable_epochs.py && cd ..
+
+  echo "Applying workaround for genesisContracts..."
+  cd localnet && sudo python3 temp_replace_genesis_smart_contracts.py && cd ..
 }
 
 if [ "$(python3 read_result.py "state")" != "paused" ]; then

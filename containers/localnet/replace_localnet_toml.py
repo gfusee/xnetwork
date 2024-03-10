@@ -8,7 +8,7 @@ toml_file_content = f"""
 port_proxy = 7950
 
 [shards]
-num_shards = 3
+num_shards = {num_shards}
 
 [software.mx_chain_go]
 resolution = "local"
