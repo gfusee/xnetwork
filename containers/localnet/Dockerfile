@@ -1,8 +1,8 @@
-FROM --platform=amd64 ghcr.io/gfusee/mx-testnet-docker:main@sha256:710e39d017fe6be27b3c9a1b61a06e9b168e157a263f19ea89e02b8c0924a2d3
+FROM ghcr.io/gfusee/mx-testnet-docker:0.0.2
 
 STOPSIGNAL SIGTERM
 
-RUN pip3 install mxops==1.0.0
+RUN pip3 install mxops==2.1.0
 
 RUN sudo apt install lsof -y
 
@@ -11,7 +11,7 @@ RUN sudo chmod +x wait-for-it.sh
 COPY run.sh .
 COPY change_prefs.py change_prefs.py
 
-COPY replace_testnet_toml.py replace_testnet_toml.py
+COPY replace_localnet_toml.py replace_localnet_toml.py
 COPY genesis.json genesis.json
 COPY create_wallet.py create_wallet.py
 COPY change_genesis.py change_genesis.py
@@ -25,6 +25,9 @@ COPY pause.sh pause.sh
 COPY handle_signal.sh handle_signal.sh
 COPY mxops-init mxops-init
 COPY run_mxops.py run_mxops.py
+COPY temp_replace_enable_epochs.py temp_replace_enable_epochs.py
+COPY temp_replace_genesis_smart_contracts.py temp_replace_genesis_smart_contracts.py
+COPY tempGenesisContracts genesisContracts
 
 RUN sudo chmod +x pause.sh
 RUN sudo chmod +x handle_signal.sh

@@ -12,7 +12,7 @@ def get_result(key):
         with open(file_path, 'r') as f:
             data = json.load(f)
 
-    return data[key]
+    return data.get(key, "")
 
 
 if __name__ == '__main__':

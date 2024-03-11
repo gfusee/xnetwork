@@ -26,9 +26,9 @@ export async function pauseExistingNetwork() {
         await pauseContainer(Constants.RABBITMQ_CONTAINER)
     }
 
-    const pausingTestnetSpinner = ora(`Pausing testnet...`).start()
-    await pauseContainer(Constants.TESTNET_CONTAINER)
-    pausingTestnetSpinner.succeed(`Paused testnet successfully`)
+    const pausingLocalnetSpinner = ora(`Pausing localnet...`).start()
+    await pauseContainer(Constants.LOCALNET_CONTAINER)
+    pausingLocalnetSpinner.succeed(`Paused localnet successfully`)
 }
 
 async function pauseContainer(containerInfos: ContainerInfos) {

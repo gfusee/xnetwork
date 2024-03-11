@@ -5,6 +5,7 @@ import sys
 should_use_elastic = sys.argv[1] == 'true'
 
 prefs_to_add = f"""
+[Preferences]
 OverridableConfigTomlValues = [
    {{ File = "external.toml", Path = "ElasticSearchConnector.Enabled", Value = "{should_use_elastic}" }},
    {{ File = "external.toml", Path = "ElasticSearchConnector.URL", Value = "http://elastic:9200" }},
@@ -21,7 +22,7 @@ def replace_in_files():
         if os.path.exists(external_toml_path):
             with open(external_toml_path, 'r') as file:
                 contents = file.read()
-            contents = contents + prefs_to_add
+            contents = prefs_to_add + contents.replace("[Preferences]", "")
             with open(external_toml_path, 'w') as file:
                 file.write(contents)
 

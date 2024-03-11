@@ -1,13 +1,13 @@
 import {execCustomInRepo} from "../exec.js";
 
-type TestnetResult = {
+type LocalnetResult = {
     genesisEgldAddress: string,
     genesisEgldPemPath?: string,
 }
 
 type NetworkState = {
-    testnetContainerState: ContainerState,
-    testnetResult?: TestnetResult
+    localnetContainerState: ContainerState,
+    localnetResult?: LocalnetResult
 }
 
 export enum ContainerState {
@@ -15,27 +15,27 @@ export enum ContainerState {
 }
 
 export async function getNetworkState(): Promise<NetworkState> {
-    const containerState = await getTestnetContainerState()
+    const containerState = await getLocalnetContainerState()
 
     try {
-        const containerResultsRaw = (await execCustomInRepo("docker-compose exec testnet cat /home/ubuntu/results.json")).stdout.toString()
-        const containerResults: TestnetResult = JSON.parse(containerResultsRaw)
+        const containerResultsRaw = (await execCustomInRepo("docker-compose exec localnet cat /home/ubuntu/results.json")).stdout.toString()
+        const containerResults: LocalnetResult = JSON.parse(containerResultsRaw)
 
         return {
-            testnetContainerState: containerState,
-            testnetResult: containerResults,
+            localnetContainerState: containerState,
+            localnetResult: containerResults,
         }
     } catch (e) {
         return {
-            testnetContainerState: containerState,
-            testnetResult: undefined,
+            localnetContainerState: containerState,
+            localnetResult: undefined,
         }
     }
 }
 
-async function getTestnetContainerState(): Promise<ContainerState> {
+async function getLocalnetContainerState(): Promise<ContainerState> {
     try {
-        const stdout = (await execCustomInRepo('docker-compose ps -a -q testnet')).stdout.toString()
+        const stdout = (await execCustomInRepo('docker-compose ps -a -q localnet')).stdout.toString()
 
         const containerId = stdout.trim()
 

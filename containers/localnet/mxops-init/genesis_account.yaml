@@ -6,4 +6,4 @@ allowed_scenario:
 
 accounts:
   - account_name: xnetwork_genesis
-    pem_path: /home/ubuntu/testnet/genesis-egld-wallet/wallet.pem
+    pem_path: /home/ubuntu/localnet/genesis-egld-wallet/wallet.pem

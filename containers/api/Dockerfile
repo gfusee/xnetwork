@@ -19,8 +19,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo ap
 RUN sudo apt install git -y
 RUN sudo apt install ffmpeg -y
 RUN sudo npm install -g @nestjs/cli
-RUN git clone https://github.com/multiversx/mx-api-service.git -b development
-RUN cd mx-api-service && git checkout 8cc3910
+RUN git clone https://github.com/multiversx/mx-api-service.git -b main
+RUN cd mx-api-service && git checkout 93a9abd0033050e46242836c6cf12e7b396e294c
 RUN cd mx-api-service && npm install
 RUN rm -rf mx-api-service/config/config.devnet.json
 COPY api-config.devnet.yaml mx-api-service/config/config.devnet.yaml

@@ -1,10 +1,10 @@
 # xNetwork
 
-This project offers an effortless way to run a local testnet of MultiversX and its corresponding API without any configuration needed.
-While you can run a local testnet of MultiversX using the [MultiversX CLI](https://multiversx.com/), this project provides a more comprehensive environment, including a proxy and a complete API.
+This project offers an effortless way to run a localnet of MultiversX and its corresponding API without any configuration needed.
+While you can run a localnet of MultiversX using the [MultiversX CLI](https://multiversx.com/), this project provides a more comprehensive environment, including a proxy and a complete API.
 
 ## Features
-- Run your own local testnet of MultiversX
+- Run your own localnet of MultiversX
 - Choose the number of shards you prefer
 - Create an initial address with 1,000,000 $EGLD
 - Run the corresponding API, identical to https://api.multiversx.com

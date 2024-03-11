@@ -1,0 +1,13 @@
+[networking]
+port_proxy = 7950
+
+[shards]
+num_shards = 3
+
+[software.mx_chain_go]
+resolution = "local"
+local_path = "/home/ubuntu/mx-chain-go"
+
+[software.mx_chain_proxy_go]
+resolution = "local"
+local_path = "/home/ubuntu/mx-chain-proxy-go"

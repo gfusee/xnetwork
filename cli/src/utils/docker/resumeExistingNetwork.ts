@@ -24,7 +24,7 @@ export async function resumeExistingNetwork() {
         await resumeContainer(Constants.RABBITMQ_CONTAINER)
     }
 
-    await resumeContainer(Constants.TESTNET_CONTAINER)
+    await resumeContainer(Constants.LOCALNET_CONTAINER)
 
     await waitForVMQueryToBeReady()
 

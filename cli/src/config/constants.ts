@@ -41,9 +41,9 @@ export class Constants {
         return path.join(Constants.CLI_USER_STORAGE_PATH, 'latest_config.json')
     }
 
-    static get TESTNET_CONTAINER(): ContainerInfos {
+    static get LOCALNET_CONTAINER(): ContainerInfos {
         return {
-            name: "testnet",
+            name: "localnet",
             pauseBehavior: PauseBehavior.PAUSE
         }
     }
