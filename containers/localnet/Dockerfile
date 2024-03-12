@@ -1,4 +1,4 @@
-FROM ghcr.io/gfusee/mx-testnet-docker:0.0.2
+FROM --platform=linux/amd64 ghcr.io/gfusee/mx-testnet-docker:0.0.2
 
 STOPSIGNAL SIGTERM
 
