@@ -4,6 +4,9 @@ import sys
 num_shards = sys.argv[1]
 
 toml_file_content = f"""
+[general]
+log_level = "*:TRACE"
+
 [networking]
 port_proxy = 7950
 
