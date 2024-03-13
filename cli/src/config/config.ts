@@ -4,6 +4,7 @@ export type CLIConfig = {
     shouldHaveRedis: boolean
     shouldHaveRabbitMQ: boolean
     shouldHaveApi: boolean
+    shouldHaveXExplorer: boolean
     numberOfShards: number
     initialEGLDAddress?: string
     mxOpsScenesPath?: string
@@ -16,6 +17,7 @@ export function getDefaultConfig(): CLIConfig {
         shouldHaveRedis: false,
         shouldHaveRabbitMQ: false,
         shouldHaveApi: false,
+        shouldHaveXExplorer: false,
         numberOfShards: 1
     }
 }

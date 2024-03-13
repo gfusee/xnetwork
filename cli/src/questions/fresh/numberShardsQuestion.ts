@@ -1,7 +1,7 @@
 import {CLIQuestion} from "../question.js";
-import {FreshLocalnetFeaturesQuestion} from "../features/freshLocalnetFeaturesQuestion.js";
 import {Answers, Question} from "inquirer";
 import {CLIConfig} from "../../config/config.js";
+import {FeaturesQuestion} from "../features/featuresQuestion.js";
 
 export class NumberShardsQuestion extends CLIQuestion {
 
@@ -31,6 +31,6 @@ export class NumberShardsQuestion extends CLIQuestion {
 
         config.numberOfShards = answers.numberShards
 
-        return [new FreshLocalnetFeaturesQuestion()]
+        return [new FeaturesQuestion()]
     }
 }

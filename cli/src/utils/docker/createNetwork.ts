@@ -60,6 +60,16 @@ export async function createNetwork(config: CLIConfig) {
             startingApiHealthCheckSpinner.succeed('API is ready')
         }
 
+        if (config.shouldHaveXExplorer) {
+            const startingApiSpinner = ora('Starting xExplorer container...').start()
+            await upContainer(Constants.XEXPLORER_CONTAINER.name)
+            startingApiSpinner.succeed('Started xExplorer container')
+
+            const startingApiHealthCheckSpinner = ora('Waiting for API to be ready').start()
+            await waitForAPIToBeReady()
+            startingApiHealthCheckSpinner.succeed('API is ready')
+        }
+
         if (config.mxOpsScenesPath) {
             const copyingScenesSpinner = ora('Copying mxops scenes...').start()
             await execCustomInRepo(`docker-compose cp ${config.mxOpsScenesPath} localnet:/home/ubuntu/mxops`)
