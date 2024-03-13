@@ -44,3 +44,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+
+  xexplorer:
+    build: containers/xexplorer
+    ports:
+      - "3002:3002"

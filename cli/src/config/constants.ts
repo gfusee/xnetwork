@@ -55,6 +55,13 @@ export class Constants {
         }
     }
 
+    static get XEXPLORER_CONTAINER(): ContainerInfos {
+        return {
+            name: "xexplorer",
+            pauseBehavior: PauseBehavior.STOP
+        }
+    }
+
     static get ELASTIC_CONTAINER(): ContainerInfos {
         return {
             name: "elastic",
