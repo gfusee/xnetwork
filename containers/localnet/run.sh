@@ -25,6 +25,7 @@ setup() {
   # Workarounds because mxpy doesn't copy arm libs yet
   sudo cp /home/ubuntu/mx-chain-vm-go/wasmer2/libvmexeccapi.so /usr/lib/libvmexeccapi.so
   sudo cp /home/ubuntu/mx-chain-vm-go/wasmer2/libvmexeccapi_arm.so /usr/lib/libvmexeccapi_arm.so
+  sudo cp /home/ubuntu/mx-chain-vm-go/wasmer/libwasmer_linux_amd64.so /usr/lib/libwasmer_linux_amd64.so
   sudo cp /home/ubuntu/mx-chain-vm-go/wasmer/libwasmer_linux_arm64_shim.so /usr/lib/libwasmer_linux_arm64_shim.so
 
   cp read_result.py localnet/read_result.py
