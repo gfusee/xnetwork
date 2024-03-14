@@ -172,7 +172,6 @@ def replace_in_files():
         with open(external_json_path, 'r') as f:
             existing_data = json.load(f)
 
-        print(f"validators_objects: {validators_objects}, shards_count: {shards_count}")
         existing_data = validators_objects[0:shards_count] + existing_data
 
         existing_data.append(genesis_object)

@@ -55,7 +55,7 @@ setup() {
   cd localnet && sudo python3 replace_economics.py "$MX_RESULT_TOTAL_SUPPLY" && cd ..
 
   echo "Applying workaround for enableEpochs..."
-  cd localnet && sudo python3 temp_replace_enable_epochs.py && cd ..
+  cd localnet && sudo python3 temp_replace_enable_epochs.py "$MX_LT_NUM_SHARDS" && cd ..
 
   echo "Applying workaround for genesisContracts..."
   cd localnet && sudo python3 temp_replace_genesis_smart_contracts.py && cd ..
