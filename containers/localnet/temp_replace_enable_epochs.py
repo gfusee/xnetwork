@@ -1,9 +1,13 @@
 import os
 import re
 import subprocess
+import sys
+
+num_shards = sys.argv[1]
+staking_v4_step3_max_num_nodes = 64 - (int(num_shards) + 1) * 2
 
 
-enable_epochs_content = """
+enable_epochs_content = f"""
     [EnableEpochs]
     # SCDeployEnableEpoch represents the epoch when the deployment of smart contracts will be enabled
     SCDeployEnableEpoch = 1
@@ -295,8 +299,8 @@ enable_epochs_content = """
 
     # BLSMultiSignerEnableEpoch represents the activation epoch for different types of BLS multi-signers
     BLSMultiSignerEnableEpoch = [
-        { EnableEpoch = 0, Type = "no-KOSK" },
-        { EnableEpoch = 1, Type = "KOSK" }
+        {{ EnableEpoch = 0, Type = "no-KOSK" }},
+        {{ EnableEpoch = 1, Type = "KOSK" }}
     ]
 
     # StakeLimitsEnableEpoch represents the epoch when stake limits on validators are enabled
@@ -315,19 +319,19 @@ enable_epochs_content = """
 
     # MaxNodesChangeEnableEpoch holds configuration for changing the maximum number of nodes and the enabling epoch
     MaxNodesChangeEnableEpoch = [
-        { EpochEnable = 0, MaxNumNodes = 48, NodesToShufflePerShard = 4 },  # 4 shuffled out keys / shard will not be reached normally
-        { EpochEnable = 1, MaxNumNodes = 64, NodesToShufflePerShard = 2 },
+        {{ EpochEnable = 0, MaxNumNodes = 48, NodesToShufflePerShard = 4 }},  # 4 shuffled out keys / shard will not be reached normally
+        {{ EpochEnable = 1, MaxNumNodes = 64, NodesToShufflePerShard = 2 }},
         # Staking v4 configuration, where:
         # - Enable epoch = StakingV4Step3EnableEpoch
         # - NodesToShufflePerShard = same as previous entry in MaxNodesChangeEnableEpoch
         # - MaxNumNodes = (MaxNumNodesFromPreviousEpochEnable - (numOfShards+1)*NodesToShufflePerShard)
-        { EpochEnable = 6, MaxNumNodes = 60, NodesToShufflePerShard = 2 },
+        {{ EpochEnable = 6, MaxNumNodes = {staking_v4_step3_max_num_nodes}, NodesToShufflePerShard = 2 }},
     ]
 
     [GasSchedule]
     # GasScheduleByEpochs holds the configuration for the gas schedule that will be applied from specific epochs
     GasScheduleByEpochs = [
-        { StartEpoch = 0, FileName = "gasScheduleV7.toml" },
+        {{ StartEpoch = 0, FileName = "gasScheduleV7.toml" }},
     ]
 """
 
