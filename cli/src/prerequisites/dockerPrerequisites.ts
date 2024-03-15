@@ -57,14 +57,14 @@ export class DockerPrerequisites implements Prerequisites {
         }
         dockerSpinner.succeed('Docker is installed')
 
-        const dockerComposeSpinner = ora('Checking if docker-compose is installed...').start()
+        const dockerComposeSpinner = ora('Checking if docker compose is installed...').start()
         try {
-            await execCustom('which docker-compose')
+            await execCustom('docker compose')
         } catch (e) {
-            dockerComposeSpinner.fail('Docker-compose is not installed')
+            dockerComposeSpinner.fail('Docker compose is not installed')
             throw dockerNotInstalledMessage
         }
-        dockerComposeSpinner.succeed('Docker-compose is installed')
+        dockerComposeSpinner.succeed('Docker compose is installed')
 
         const dockerDaemonSpinner = ora('Checking if docker daemon is running...').start()
         try {

@@ -32,7 +32,7 @@ export async function pauseExistingNetwork() {
 }
 
 async function pauseContainer(containerInfos: ContainerInfos) {
-    const command = containerInfos.pauseBehavior === PauseBehavior.PAUSE ? 'docker-compose stop' : 'yes | docker-compose rm -s -v'
+    const command = containerInfos.pauseBehavior === PauseBehavior.PAUSE ? 'docker compose stop' : 'yes | docker compose rm -s -v'
     const pausingVerb = containerInfos.pauseBehavior === PauseBehavior.PAUSE ? 'Pausing' : 'Stopping'
     const pausedVerb = containerInfos.pauseBehavior === PauseBehavior.PAUSE ? 'Paused' : 'Stopped'
 

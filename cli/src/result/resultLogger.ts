@@ -36,7 +36,7 @@ export class ResultLogger {
         }
 
         if (containerResults.genesisEgldPemPath) {
-            const addressPrivateKey = (await execCustomInRepo(`docker-compose exec localnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
+            const addressPrivateKey = (await execCustomInRepo(`docker compose exec localnet cat ${containerResults.genesisEgldPemPath}`)).stdout.toString()
             firstPartResultString += `
             An address with 1,000,000 EGLD was generated for you. Here are the details:
             
@@ -55,7 +55,7 @@ export class ResultLogger {
         let mxOpsDisplayString = ''
 
         if (config.mxOpsScenesPath) {
-            const mxopsXNetworkValuesRaw = (await execCustomInRepo(`docker-compose exec localnet python3 -m mxops data get -n LOCAL -s xnetwork`)).stdout.toString()
+            const mxopsXNetworkValuesRaw = (await execCustomInRepo(`docker compose exec localnet python3 -m mxops data get -n LOCAL -s xnetwork`)).stdout.toString()
             const searchString = 'ABSOLUTELY NO WARRANTY\n'
             const mxopsXNetworkValues = mxopsXNetworkValuesRaw.substring(mxopsXNetworkValuesRaw.lastIndexOf(searchString) + searchString.length).trim()
             const mxopsXNetworkValuesObject = JSON.parse(mxopsXNetworkValues)
