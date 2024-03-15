@@ -37,7 +37,7 @@ async function resumeContainer(containerInfos: ContainerInfos) {
     const removingNetworkSpinner = ora(`Resuming ${containerInfos.name}...`).start()
 
     if (containerInfos.pauseBehavior === PauseBehavior.PAUSE) {
-        await execCustomInRepo(`docker-compose start ${containerInfos.name}`, false)
+        await execCustomInRepo(`docker compose start ${containerInfos.name}`, false)
     } else {
         await upContainer(containerInfos.name, undefined, false)
     }

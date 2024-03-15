@@ -18,7 +18,7 @@ export async function getNetworkState(): Promise<NetworkState> {
     const containerState = await getLocalnetContainerState()
 
     try {
-        const containerResultsRaw = (await execCustomInRepo("docker-compose exec localnet cat /home/ubuntu/results.json")).stdout.toString()
+        const containerResultsRaw = (await execCustomInRepo("docker compose exec localnet cat /home/ubuntu/results.json")).stdout.toString()
         const containerResults: LocalnetResult = JSON.parse(containerResultsRaw)
 
         return {
@@ -35,7 +35,7 @@ export async function getNetworkState(): Promise<NetworkState> {
 
 async function getLocalnetContainerState(): Promise<ContainerState> {
     try {
-        const stdout = (await execCustomInRepo('docker-compose ps -a -q localnet')).stdout.toString()
+        const stdout = (await execCustomInRepo('docker compose ps -a -q localnet')).stdout.toString()
 
         const containerId = stdout.trim()
 

@@ -72,11 +72,11 @@ export async function createNetwork(config: CLIConfig) {
 
         if (config.mxOpsScenesPath) {
             const copyingScenesSpinner = ora('Copying mxops scenes...').start()
-            await execCustomInRepo(`docker-compose cp ${config.mxOpsScenesPath} localnet:/home/ubuntu/mxops`)
+            await execCustomInRepo(`docker compose cp ${config.mxOpsScenesPath} localnet:/home/ubuntu/mxops`)
             copyingScenesSpinner.succeed('Copied mxops scenes')
 
             const runningScenesSpinner = ora('Running mxops scenes...').start()
-            await execCustomInRepo(`docker-compose exec localnet python3 run_mxops.py`)
+            await execCustomInRepo(`docker compose exec localnet python3 run_mxops.py`)
             runningScenesSpinner.succeed('Ran mxops scenes')
         }
 
